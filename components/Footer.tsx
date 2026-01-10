@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import logo from '../assets/noVaLogo.png';
 const Footer: React.FC = () => {
   return (
     <footer className="border-t border-white/5 py-24 px-8 md:px-12 bg-bg-dark relative overflow-hidden">
@@ -8,9 +8,14 @@ const Footer: React.FC = () => {
         <div className="md:col-span-2 space-y-8">
           <div className="flex items-center gap-3">
             <div className="size-8 bg-zinc-800 rounded-lg flex items-center justify-center">
-              <span className="text-primary text-lg material-symbols-outlined">architecture</span>
+              {/* <span className="text-primary text-lg material-symbols-outlined">architecture</span> */}
+               <img
+              src={logo}
+              alt="Novatek logo"
+              className="w-6 h-6 object-contain"
+            />
             </div>
-            <span className="text-white font-bold tracking-tighter text-2xl uppercase">novatek</span>
+            <span className="text-white font-bold tracking-tighter text-2xl">novatek</span>
           </div>
           <p className="text-lg text-zinc-500 font-light max-w-sm leading-relaxed">
             Building the technical foundations for the next generation of industry leaders.
