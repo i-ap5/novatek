@@ -85,7 +85,7 @@ const DetailedServices: React.FC = () => {
                 {service.title}
               </h3>
               
-              <p className="text-zinc-500 text-sm leading-relaxed font-light mb-12 h-20 overflow-hidden">
+              <p className="text-zinc-500 text-sm leading-relaxed font-light mb-12 h-24 overflow-auto">
                 {service.description}
               </p>
 
