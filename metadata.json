@@ -1,0 +1,8 @@
+{
+  "name": "Novatek Digital Systems",
+  "description": "A high-fidelity agency website for Novatek, featuring a minimalist dark aesthetic, interactive engineering journey, and AI-powered project architecture consultant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
