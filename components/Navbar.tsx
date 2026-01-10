@@ -50,13 +50,13 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          <div className="hidden sm:flex flex-col items-end pr-6 border-r border-white/10">
+          {/* <div className="hidden sm:flex flex-col items-end pr-6 border-r border-white/10">
             <span className="text-[10px] font-bold text-zinc-600 tracking-widest uppercase">System Status</span>
             <div className="flex items-center gap-2">
               <span className="size-1.5 bg-green-500 rounded-full"></span>
               <span className="text-[10px] font-bold text-green-500 uppercase">Operational</span>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
           <a href="#contact" className="bg-white text-bg-dark px-6 py-3 text-xs font-bold rounded-full hover:bg-primary transition-all active:scale-95">
             Get in touch
           </a>
