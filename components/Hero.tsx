@@ -29,13 +29,13 @@ const Hero: React.FC = () => {
       </div>
       
       <h1 className="opacity-0 animate-text-reveal delay-2 text-7xl md:text-9xl font-semibold leading-[0.9] text-white tracking-tighter max-w-4xl selection:bg-white selection:text-bg-dark">
-        software built <br /> 
+        software built to &nbsp;
         <span className="text-gray-400 hover:text-primary transition-colors duration-500 cursor-default font-bold">
-          to endure.
+          endure.
         </span>
       </h1>
 
-      <p className="opacity-0 animate-text-reveal delay-3 text-l md:text-2xl text-grey-400 font-light max-w-2xl leading-relaxed md:mx-auto">
+      <p className="opacity-0 animate-text-reveal delay-3 text-l md:text-2xl text-grey-400 font-regular max-w-2xl leading-relaxed md:mx-auto">
         Novatek crafts high-performance digital systems that are fast, secure, and ready for global enterprise scale.
       </p>
 

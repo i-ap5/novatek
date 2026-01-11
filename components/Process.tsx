@@ -32,7 +32,7 @@ const Process: React.FC = () => {
                   <span className="text-[8rem] font-black text-white/5 group-hover:text-primary/10 transition-colors leading-none">{step.id}</span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-4xl font-bold text-white mb-6 group-hover:text-primary transition-colors">{step.title}</h3>
+                  <h3 className="text-4xl font-mono font-bold text-white mb-6 group-hover:text-primary transition-colors">{step.title}</h3>
                   <p className="text-xl text-zinc-500 font-light max-w-lg mb-12">
                     {step.desc}
                   </p>
