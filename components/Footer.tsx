@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
               className="w-6 h-6 object-contain"
             />
             </div>
-            <span className="text-white font-bold tracking-tighter text-2xl">novatek</span>
+            <span className="text-white font-bold tracking-tighter text-2xl">Novatek</span>
           </div>
           <p className="text-lg text-zinc-500 font-light max-w-sm leading-relaxed">
             Building the technical foundations for the next generation of industry leaders.
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-sm font-bold text-white uppercase tracking-widest">Global Offices</h4>
+          <h4 className="text-sm font-bold text-white uppercase tracking-widest"> Office</h4>
           <p className="text-sm text-zinc-500 font-light leading-relaxed">
             Novatek Solutions<br/>
            Thanisandra Main Road<br/>
@@ -53,8 +53,8 @@ const Footer: React.FC = () => {
 
             {/* Left block */}
             <div className="flex flex-col items-center md:items-start gap-1">
-              <span>© 2026 Novatek Solutions Ltd. All rights reserved.</span>
-              <span className="text-zinc-600 font-normal tracking-[0.15em]">
+              <span>Novatek © 2026 All rights reserved.</span>
+              <span className="tracking-[0.15em]">
                 Designed by{" "}
                 <a
                   href="https://trowcode.com"

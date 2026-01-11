@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             />
             {/* <span className="material-symbols-outlined text-bg-dark text-xl font-bold">architecture</span> */}
           </div>
-          <span className="text-2xl font-bold tracking-tight                                                                                                                     q text-white group-hover:text-primary transition-colors">novatek</span>
+          <span className="text-2xl font-bold tracking-tight                                                                                                                     q text-white group-hover:text-primary transition-colors">Novatek</span>
         </a>
 
         <div className="hidden lg:flex items-center gap-10">
