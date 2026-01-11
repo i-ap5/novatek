@@ -29,9 +29,9 @@ const Hero: React.FC = () => {
       </div>
       
       <h1 className="opacity-0 animate-text-reveal delay-2 text-7xl md:text-9xl font-semibold leading-[0.9] text-white tracking-tighter max-w-4xl selection:bg-white selection:text-bg-dark">
-        software built to &nbsp;
+          software built to{" "}
         <span className="text-gray-400 hover:text-primary transition-colors duration-500 cursor-default font-bold">
-          endure.
+        endure.
         </span>
       </h1>
 
