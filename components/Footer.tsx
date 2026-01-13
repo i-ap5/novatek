@@ -41,7 +41,8 @@ const Footer: React.FC = () => {
           <h4 className="text-sm font-bold text-white uppercase tracking-widest"> Office</h4>
           <p className="text-sm text-zinc-500 font-light leading-relaxed">
             Novatek Solutions<br/>
-           Thanisandra Main Road<br/>
+            107 J, Monarch Serenity <br /> 
+            Thanisandra Main Road<br/>
             Bengaluru, Karnataka- 560077
           </p>
         </div>
