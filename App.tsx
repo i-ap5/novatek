@@ -1,36 +1,29 @@
-
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Principles from './components/Principles';
 import Vision from './components/Vision';
-import Team from './components/Team';
 import Capabilities from './components/Capabilities';
 import Process from './components/Process';
 import Contact from './components/Contact';
-import AIConsultant from './components/AIConsultant';
 import Footer from './components/Footer';
 import DetailedServices from './components/DetailedService';
+import Portfolio from './components/Portfolio';
+import Products from './components/Products';
 import Reveal from './components/Reveal';
+import ScrollToHash from './components/ScrollToHash';
 
-const App: React.FC = () => {
+const LandingPage: React.FC = () => {
   return (
-    <div className="relative bg-bg-dark min-h-screen selection:bg-primary selection:text-bg-dark overflow-x-hidden">
-      {/* Universal Grain & Blueprint Grid Overlay - Subtle globally */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-      <div className="fixed inset-0 pointer-events-none grid-blueprint z-0 opacity-10"></div>
-
-      <Navbar />
-
-      <main className="relative z-10">
-
+    <>
       <section id="home">
         <Hero />
         <Reveal>
           <Principles />
         </Reveal>
         <Reveal>
-           <Vision />
+          <Vision />
         </Reveal>
       </section>
 
@@ -47,6 +40,18 @@ const App: React.FC = () => {
       </Reveal>
 
       <Reveal>
+        <section id="portfolio" className="border-t border-border-light">
+          <Portfolio teaser={true} />
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section id="products" className="border-t border-border-light">
+          <Products teaser={true} />
+        </section>
+      </Reveal>
+
+      <Reveal>
         <section id="process" className="border-t border-border-light">
           <Process />
         </section>
@@ -57,13 +62,32 @@ const App: React.FC = () => {
           <Contact />
         </section>
       </Reveal>
+    </>
+  );
+};
 
-    </main>
+const App: React.FC = () => {
+  return (
+    <Router>
+      <ScrollToHash />
+      <div className="relative bg-bg-dark min-h-screen selection:bg-primary selection:text-bg-dark">
+        {/* Lightweight grain texture — static image instead of live SVG filter */}
+        <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100]" style={{ backgroundImage: 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMCBggKDA6u9PEIAAAASUlEQVQ4y2NghgIGBgYWBgYGFxgDA4sDAwOLCwODgwsDA0MLAwNDCwMDQwsDg0MLiM3CwMLg4ABiO4DZLGAGCxjBAGazMIyKDCYAAD+lBzFE24P2AAAAAElFTkSuQmCC")', backgroundRepeat: 'repeat', backgroundSize: '48px 48px' }}></div>
+        <div className="fixed inset-0 pointer-events-none grid-blueprint z-0 opacity-[0.04]"></div>
 
+        <Navbar />
 
-      {/* <AIConsultant /> */}
-      <Footer />
-    </div>
+        <main className="relative z-10">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/portfolio" element={<Portfolio teaser={false} />} />
+            <Route path="/products" element={<Products teaser={false} />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </Router>
   );
 };
 

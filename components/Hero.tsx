@@ -1,42 +1,43 @@
 
 import React from 'react';
 import Aurora from './Aurora';
-import LiquidEther from './LiquidEther';
+
 
 const Hero: React.FC = () => {
   const pillars = [
-    { title: 'Built to Scale', desc: 'Infrastructure that grows effortlessly.', icon: 'trending_up' },
-    { title: 'Cleaner Code', desc: 'Zero technical debt architecture.', icon: 'auto_awesome' },
-    { title: 'Ironclad Security', desc: 'Modern data protection standards.', icon: 'verified_user' }
+    { title: 'Built to Scale', desc: 'Software and systems designed to grow easily as your traffic increases.', icon: 'trending_up' },
+    { title: 'Clean Architecture', desc: 'Written using clear, modern standards that are simple to update.', icon: 'auto_awesome' },
+    { title: 'Top-Tier Security', desc: 'Keeping your customer and business data fully protected at every layer.', icon: 'verified_user' }
   ];
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center pt-32 pb-24 px-8 md:px-12 relative overflow-hidden bg-bg-dark">
+    <section className="min-h-screen flex flex-col items-center justify-center pt-32 pb-24 relative overflow-hidden bg-bg-dark">
       {/* BG */}
       <Aurora />
       
       {/* Subtle overlay to ensure text readability against the flare */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-bg-dark/20 via-transparent to-bg-dark/40 pointer-events-none"></div>
       
-      <div className="max-w-[1200px] mx-auto w-full relative z-10 text-center flex flex-col items-center">
+      <div className="max-w-[1400px] mx-auto w-full px-6 md:px-20 relative z-10 text-center flex flex-col items-center">
         
        <div className="animate-fade-up space-y-10 flex flex-col items-start md:items-center text-left md:text-center">
-      <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-xl hover:border-primary/40 transition-colors">
-        <span className="size-2 bg-primary rounded-full animate-pulse"></span>
-        <span className="opacity-0 animate-text-reveal delay-1 text-[8px] md:text-[10px] font-bold tracking-[0.3em] text-primary uppercase">
+      <div className="inline-flex items-center gap-3">
+        <span className="h-[1px] w-6 bg-primary/30"></span>
+        <span className="opacity-0 animate-text-reveal delay-1 text-[9px] font-mono tracking-[0.35em] text-primary uppercase">
           Built beyond today
         </span>
+        <span className="h-[1px] w-6 bg-primary/30 hidden md:inline-block"></span>
       </div>
       
-      <h1 className="opacity-0 animate-text-reveal delay-2 text-7xl md:text-9xl font-semibold leading-[0.9] text-white tracking-tighter max-w-4xl selection:bg-white selection:text-bg-dark">
+      <h1 className="opacity-0 animate-text-reveal delay-2 text-7xl sm:text-8xl md:text-9xl font-semibold leading-[0.9] text-white tracking-tighter max-w-4xl selection:bg-white selection:text-bg-dark">
           software built to{" "}
         <span className="text-gray-400 hover:text-primary transition-colors duration-500 cursor-default font-bold">
         endure.
         </span>
       </h1>
 
-      <p className="opacity-0 animate-text-reveal delay-3 text-l md:text-2xl text-grey-400 font-regular max-w-2xl leading-relaxed md:mx-auto">
-        Novatek crafts high-performance digital systems that are fast, secure, and ready for global enterprise scale.
+      <p className="opacity-0 animate-text-reveal delay-3 text-l md:text-2xl text-zinc-400 font-regular max-w-2xl leading-relaxed md:mx-auto">
+        We build fast, secure, and custom software designed to help your business run smoothly and scale effortlessly.
       </p>
 
       <div className=" opacity-0 animate-text-reveal delay-4 flex flex-wrap items-center justify-start md:justify-center gap-6 pt-6">

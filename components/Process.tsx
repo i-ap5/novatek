@@ -3,21 +3,21 @@ import React from 'react';
 
 const Process: React.FC = () => {
   const steps = [
-    { id: '01', title: 'Discovery', desc: 'Analyzing existing debt and ecosystem requirements.', tags: ['SC_AUDIT', 'MAPPING'] },
-    { id: '02', title: 'Logic', desc: 'Drafting deterministic blueprints and data-flow logic.', tags: ['BLUEPRINT', 'WAF'] },
-    { id: '03', title: 'Deploy', desc: 'Atomic CI/CD deployment with zero-downtime rollback.', tags: ['K8S', 'RUST'] },
-    { id: '04', title: 'Harden', desc: 'Post-deployment security audits and stress testing.', tags: ['FEYNMAN', 'STRESS'] }
+    { id: '01', title: 'Discovery', desc: 'We analyze your business goals, target audience, and existing technical systems.', tags: ['PLANNING', 'AUDIT'] },
+    { id: '02', title: 'Design', desc: 'We create clear system blueprints and map out the visual user flows.', tags: ['BLUEPRINT', 'WORKFLOW'] },
+    { id: '03', title: 'Development', desc: 'We write clean, optimized code and launch using automated, secure systems.', tags: ['DEVELOP', 'LAUNCH'] },
+    { id: '04', title: 'Testing', desc: 'We run thorough security checks and load tests to ensure complete stability.', tags: ['SECURITY', 'TESTING'] }
   ];
 
   return (
-    <div className="py-48 relative overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-8 md:px-12">
+    <div id="process" className="py-48 relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
           <div className="lg:col-span-4 lg:sticky lg:top-48 h-fit">
-            <span className="text-primary font-mono text-[10px] tracking-[0.5em] uppercase block mb-8">SEQUENCE</span>
-            <h2 className="text-7xl font-medium tracking-tighter text-white mb-8">Logic <br/> <span className="text-zinc-600 font-bold">Flow.</span></h2>
+            <span className="text-primary font-mono text-[10px] tracking-[0.5em] uppercase block mb-8">Our Process</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white mb-8">How we <br/> <span className="text-zinc-600 font-medium">work.</span></h2>
             <p className="text-zinc-500 font-light leading-relaxed mb-12">
-              Our engineering lifecycle is defined by deterministic precision. Every phase is a gate that must be validated by automated protocols.
+              We follow a structured, step-by-step approach to build your software. Every phase is tested and verified to guarantee high quality and stability.
             </p>
             {/* <div className="p-6 border border-primary/20 bg-primary/5">
               <span className="font-mono text-[9px] text-primary tracking-widest uppercase">system_note</span>

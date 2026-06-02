@@ -367,8 +367,21 @@ const Aurora = ({
     };
     window.addEventListener('mousemove', onMove);
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+
     let raf = 0;
     const update = (t: number) => {
+      if (!isVisible) {
+        raf = requestAnimationFrame(update);
+        return;
+      }
       mouse.current.x += (target.current.x - mouse.current.x) * 0.3;
       mouse.current.y += (target.current.y - mouse.current.y) * 0.3;
 
@@ -391,6 +404,7 @@ const Aurora = ({
 
     return () => {
       cancelAnimationFrame(raf);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
       gl.canvas.remove();

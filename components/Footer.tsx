@@ -1,6 +1,7 @@
 
 import React from 'react';
-import logo from '../assets/noVaLogo.png';
+
+const logo = '/assets/noVaLogo.png';
 const Footer: React.FC = () => {
   return (
     <footer className="border-t border-white/5 py-24 px-8 md:px-12 bg-bg-dark relative overflow-hidden">

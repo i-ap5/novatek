@@ -5,44 +5,44 @@ const DetailedServices: React.FC = () => {
   const services = [
     {
       id: '01',
-      title: 'Web Engineering',
-      description: 'High-performance, edge-first web applications built with Next.js, React, and Rust-based backends.',
-      tech: ['Next.js', 'Rust', 'TypeScript', 'Edge Runtime', '+More'],
+      title: 'Web Development',
+      description: 'Fast, modern web applications built using Next.js and React that look great and load instantly on all devices.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Edge Runtime', '+More'],
       icon: 'captive_portal'
     },
     {
       id: '02',
-      title: 'Interface Design',
-      description: 'System-driven UI/UX design focusing on architectural clarity, motion physics, and user efficiency.',
+      title: 'UI/UX Design',
+      description: 'Beautiful, user-friendly layouts and animations designed to make your software intuitive and easy to navigate.',
       tech: ['Figma', 'Motion', 'Design Systems', 'A11y', '+More' ],
       icon: 'palette'
     },
     {
       id: '03',
       title: 'Custom Software',
-      description: 'Scalable enterprise solutions tailored to specific business logic, from ERPs to custom automation engines.',
-      tech: ['Go', 'PostgreSQL', 'Microservices', 'Event-Driven', '+More'],
+      description: 'Bespoke software systems built to match your workflows, from internal databases to automated business portals.',
+      tech: ['Go', 'PostgreSQL', 'Databases', 'APIs', '+More'],
       icon: 'terminal'
     },
     {
       id: '04',
-      title: 'Cloud Systems',
-      description: 'Fault-tolerant infrastructure orchestration using Kubernetes and multi-cloud strategies.',
-      tech: ['AWS', 'K8s', 'Terraform', 'CI/CD', '+More'],
-      icon: 'cloud_done'
+      title: 'E-commerce Platforms',
+      description: 'High-converting online stores built on modern platforms or custom backends, fully optimized for checkouts, payments, and speed.',
+      tech: ['Shopify', 'Stripe', 'WooCommerce', 'Analytics', '+More'],
+      icon: 'shopping_bag'
     },
     {
       id: '05',
-      title: 'AI & Data',
-      description: 'Integrating LLMs and machine learning pipelines into existing products for intelligent decision making.',
-      tech: ['PyTorch', 'Gemini API', 'Vector DBs', 'Python', '+More'],
+      title: 'AI Integration',
+      description: 'Integrating smart AI features and data models to automate manual tasks and power smart features.',
+      tech: ['Gemini API', 'Vector DBs', 'Python', 'LLMs', '+More'],
       icon: 'database'
     },
     {
       id: '06',
-      title: 'Cyber Security',
-      description: 'Zero-trust architecture implementation, security audits, and automated threat detection.',
-      tech: ['Pentesting', 'IAM', 'Encryption', 'AuthN', '+More'],
+      title: 'Cybersecurity',
+      description: 'Thorough security audits and encryption protocols to protect your business systems and client data.',
+      tech: ['Audits', 'IAM', 'Encryption', 'AuthN', '+More'],
       icon: 'shield_lock'
     }
   ];
@@ -52,16 +52,16 @@ const DetailedServices: React.FC = () => {
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="max-w-[1400px] mx-auto px-8 md:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-baseline mb-24 border-b border-white/5 pb-12">
           <div className="max-w-2xl">
             <span className="text-primary font-mono text-[10px] tracking-[0.6em] uppercase block mb-6">Core Competencies</span>
-            <h2 className="text-5xl md:text-7xl font-medium text-white tracking-tighter leading-none">
-              Technical <br/> <span className="text-zinc-600 font-semibold">verticals.</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white">
+               What we <br/> <span className="text-zinc-600 font-medium">build.</span>
             </h2>
           </div>
           <p className="text-zinc-500 font-light max-w-xs md:text-right mt-8 md:mt-0">
-            A comprehensive suite of engineering disciplines designed for complex digital challenges.
+            A full suite of design and development services to solve your technical and business challenges.
           </p>
         </div>
 

@@ -1,0 +1,676 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
+interface Stat {
+  value: string;
+  suffix: string;
+  label: string;
+}
+
+interface Product {
+  id: string;
+  tag: string;
+  title: string;
+  problem: string;
+  solution: string;
+  impact: string;
+  stats: Stat[];
+  features: string[];
+}
+
+const products: Product[] = [
+  {
+    id: "01",
+    tag: "LANGUAGE & AUDIO - 03",
+    title: "Sentiment Analysis — Ecommerce Review Intelligence",
+    problem: "An ecommerce platform struggled to understand what customers were most talking about across thousands of product reviews. Manual reading was unscalable, leaving negative sentiment and recurring complaint topics undetected until they affected ratings.",
+    solution: "Built a sentiment analysis pipeline to categorise reviews by topic, surface the most discussed subjects and classify sentiment per category. Integrated with the product review feed to deliver real-time topic trend dashboards for merchandising and support teams.",
+    impact: "Negative sentiment detection response improved by 50%, enabling faster interventions. Actionable topic insights drove a 15% increase in campaign success rates and helped product teams prioritise improvements based on what customers talked about most.",
+    stats: [
+      { value: "50%", suffix: "Faster", label: "Negative detection" },
+      { value: "+15%", suffix: "Campaigns", label: "Success rate lift" },
+      { value: "Topic", suffix: "Clusters", label: "Auto-categorised" }
+    ],
+    features: [
+      "Ecommerce: Product review feed",
+      "Topic Categorisation: Most-talked subjects",
+      "Trend Dashboard: Real-time insights"
+    ]
+  },
+  {
+    id: "02",
+    tag: "LANGUAGE & AUDIO - 02",
+    title: "Echo Link — Offline RAG Document Extraction",
+    problem: "Organizations handling large volumes of unstructured documents such as contracts, invoices and legal agreements struggled with manual extraction that was slow, error-prone and inconsistent across varying document formats.",
+    solution: "Fine-tuned LLM deployed offline for document extraction across tables, key-value pairs and long-form text. Integrated with existing document management systems via LLM APIs and added human-in-the-loop validation pipelines for edge cases.",
+    impact: "Document processing time reduced by 70%, enabling faster operational cycles. Labor costs cut by up to 40% through automation. Data extraction accuracy improved from 85% to 98%, significantly reducing compliance risks.",
+    stats: [
+      { value: "70%", suffix: "Faster", label: "Processing time" },
+      { value: "40%", suffix: "Cost Cut", label: "Labor automation" },
+      { value: "98%", suffix: "Accuracy", label: "Up from 85%" }
+    ],
+    features: [
+      "Multi-format Docs: Contracts, invoices, legal",
+      "Offline Deployment: Air-gapped LLM pipeline",
+      "RAG Architecture: Context-aware retrieval"
+    ]
+  },
+  {
+    id: "03",
+    tag: "VOICE AGENTS - 01",
+    title: "Hospitality Voice — AI Support & Sales Agent",
+    problem: "Hospitality chains handling multi-property guest calls struggled with high volumes, inconsistent service and agents tied up on repetitive booking and availability queries. Sales teams had no scalable way to run proactive outreach across large lead pipelines.",
+    solution: "Built a voice AI agent handling inbound support calls with NLU intent resolution, TTS response generation and CRM-API integration. Paired with an AI sales assistant for proactive lead outreach, qualification and conversion tracking across the hospitality chain.",
+    impact: "1,847 calls handled daily at 91.4% automation rate. AI sales assistant engaged 1,284 leads at 18.4% conversion rate with $48k projected revenue. Human agents freed to handle escalations only, improving service quality and sales efficiency at scale.",
+    stats: [
+      { value: "91.4%", suffix: "Automation", label: "Voice AI agent" },
+      { value: "1,284", suffix: "Leads", label: "18.4% conv. rate" },
+      { value: "$48k", suffix: "Revenue", label: "Q3 projected" }
+    ],
+    features: [
+      "Voice AI: Control Center call routing",
+      "Live Activity Feed: Real-time caller intent",
+      "AI Sales Assistant: Lead conversion at scale"
+    ]
+  }
+];
+
+const sentimentClusters: Record<string, string> = {
+  "Overall Performance": "AI Consensus: High performance yields a 96% positive rating. Users highlight the M3 processor's ability to handle demanding compilation scripts and Docker configurations without stuttering.",
+  "Battery Life": "AI Consensus: Outstanding endurance noted. Multiple buyers report a stable 18+ hour lifespan under continuous load, eliminating regular charging dependencies.",
+  "Screen Quality": "AI Consensus: The 500-nit Liquid Retina display gets highly rated for color precision and outdoor clarity. Ideal for visual validation workflows.",
+  "Portability": "AI Consensus: The sleek chassis design is praised for travelers. It offers the lightweight benefits of a tablet but compiles code like a workspace.",
+  "M3 Chip Speed": "AI Consensus: Benchmark scores show a 32% increase in speed over prior chips. Build times are cut in half for enterprise web platforms.",
+  "Build Quality": "AI Consensus: Excellent durability feedback. Space black anodized finish resists smudges and keys remain highly tactile after months of intensive use."
+};
+
+// 1. PRODUCTS TEASER COMPONENT (LANDING PAGE ONLY)
+const ProductsTeaser: React.FC = () => {
+  return (
+    <section id="products" className="py-32 bg-bg-dark relative overflow-hidden">
+      {/* Decors */}
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[130px] pointer-events-none"></div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
+          <div className="max-w-2xl">
+            <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-6">AI Suite</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white">
+              Proprietary <br /> <span className="text-zinc-600 font-medium">products.</span>
+            </h2>
+          </div>
+          <p className="text-zinc-500 text-lg font-light max-w-sm border-l border-zinc-800 pl-8">
+            Advanced language, audio, and reasoning pipelines packaged into production-ready software suites.
+          </p>
+        </div>
+
+        {/* 3-column teaser cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {products.map((p) => (
+            <div key={p.id} className="glass-card rounded-3xl p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 group">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+              <div>
+                <span className="text-[9px] font-mono tracking-widest text-primary uppercase block mb-4">
+                  {p.id} // {p.tag.split(" - ")[0]}
+                </span>
+                <h3 className="text-xl font-medium text-white mb-4 group-hover:text-primary transition-colors">
+                  {p.title.split(" — ")[0]}
+                </h3>
+                <p className="text-zinc-400 font-light text-xs leading-relaxed mb-6">
+                  {p.solution}
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-white/5 space-y-4">
+                {/* Highlight Stat */}
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-mono text-primary font-light">{p.stats[0].value}</span>
+                  <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{p.stats[0].label}</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {p.features.slice(0, 2).map((f) => (
+                    <span key={f} className="px-2 py-0.5 bg-zinc-900 border border-white/5 text-[8px] font-mono tracking-wider text-zinc-500 uppercase rounded">
+                      {f.split(":")[0]}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <Link 
+            to="/products" 
+            className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-mono text-[10px] tracking-widest uppercase py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
+          >
+            Launch Interactive Product Simulators
+            <span className="material-symbols-outlined text-xs group-hover:translate-x-1.5 transition-transform">east</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 2. FULL EDITORIAL VERTICAL SCROLL WORKSPACE COMPONENT (FOR DEDICATED ROUTE)
+const ProductsWorkspace: React.FC = () => {
+  // Sentiment Analysis mockup state
+  const [selectedCluster, setSelectedCluster] = useState("Overall Performance");
+
+  // Echo Link states
+  const [activeDoc, setActiveDoc] = useState("Saudi_Oil_Annual_Report_2024.pdf");
+  const [chatHistory, setChatHistory] = useState([
+    {
+      role: 'user',
+      text: "What were the key crude oil production milestones in Saudi Arabia for 2024?"
+    },
+    {
+      role: 'assistant',
+      ref: "Saudi_Oil_Annual_Report_2024.pdf Page 5 - Production Overview",
+      text: "In 2024, Saudi Arabia maintained its position as the world's leading crude oil exporter, sustaining average daily production of 9.6 million barrels per day. The Kingdom's Ghawar field continued to..."
+    }
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+
+  // Hospitality Voice states
+  const [activeCalls, setActiveCalls] = useState(24);
+  const [callsToday, setCallsToday] = useState(1847);
+  const [simulationActive, setSimulationActive] = useState(false);
+  const [simulationLogs, setSimulationLogs] = useState<string[]>([
+    "System initialized.",
+    "Pipeline: Ready to resolve guest calls."
+  ]);
+
+  // Simulate Hospitality calls in background
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (simulationActive) {
+      interval = setInterval(() => {
+        setActiveCalls(prev => Math.max(15, prev + Math.floor(Math.random() * 5) - 2));
+        setCallsToday(prev => prev + 1);
+        const logEvents = [
+          "Incoming Call: Booking request routing...",
+          "Resolved via Voice-AI: Checkout date extended.",
+          "Incoming Call: High priority escalations to Desk.",
+          "Resolved via CRM-API: Booking slot locked."
+        ];
+        const randomLog = logEvents[Math.floor(Math.random() * logEvents.length)];
+        setSimulationLogs(prev => [randomLog, ...prev.slice(0, 3)]);
+      }, 2500);
+    }
+    return () => clearInterval(interval);
+  }, [simulationActive]);
+
+  // Handle suggested question selection in Echo Link
+  const handleQuestionClick = (qText: string, refDoc: string, refText: string) => {
+    if (isTyping) return;
+    setIsTyping(true);
+    
+    setChatHistory(prev => [...prev, { role: 'user', text: qText }]);
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setChatHistory(prev => [...prev, {
+        role: 'assistant',
+        ref: refDoc,
+        text: refText
+      }]);
+    }, 1200);
+  };
+
+  const handleDocClick = (docName: string) => {
+    setActiveDoc(docName);
+    const docQueries: Record<string, { q: string, ref: string, ans: string }> = {
+      "Saudi_Oil_Annual_Report_2024.pdf": {
+        q: "What were the key crude oil production milestones in Saudi Arabia for 2024?",
+        ref: "Saudi_Oil_Annual_Report_2024.pdf Page 5",
+        ans: "In 2024, Saudi Arabia maintained its position as the world's leading crude oil exporter, sustaining average daily production of 9.6 million barrels per day. The Kingdom's Ghawar field continued to..."
+      },
+      "ME_Upstream_Production_Q4_2024.pdf": {
+        q: "Show summary statistics for Q4 2024 upstream production.",
+        ref: "ME_Upstream_Production_Q4_2024.pdf Page 3 - Q4 Telemetry",
+        ans: "Q4 production averaged 8.9M barrels per day. Rig counts stabilized at 112 active deployments with refinery throughput up by 2.4%."
+      },
+      "Saudi_Refinery_Operations_2024.pdf": {
+        q: "What is the processing efficiency for downstream assets?",
+        ref: "Saudi_Refinery_Operations_2024.pdf Page 14 - Downstream Efficiency",
+        ans: "Refinery operations showed a processing efficiency increase of 4.2% in 2024. Downstream utilization reached a record 94% average."
+      },
+      "GCC_Energy_Sustainability_Report.pdf": {
+        q: "What is the green energy transition status for 2024?",
+        ref: "GCC_Energy_Sustainability_Report.pdf Page 8 - ESG Transition",
+        ans: "Renewable energy integration in the GCC power grid saw a record 45% capacity expansion in 2024, driven primarily by PV solar projects."
+      },
+      "Vision2030_Energy_Strategy_KSA.pdf": {
+        q: "What are the carbon reduction targets under KSA Vision 2030?",
+        ref: "Vision2030_Energy_Strategy_KSA.pdf Page 45 - Carbon Goals",
+        ans: "The targets mandate a reduction of 278 million tons of carbon dioxide equivalent per annum by 2030, deploying massive solar and wind grids."
+      }
+    };
+
+    const target = docQueries[docName];
+    if (target) {
+      handleQuestionClick(target.q, target.ref, target.ans);
+    }
+  };
+
+  const renderInteractiveMockup = (idx: number) => {
+    if (idx === 0) {
+      return (
+        <div className="flex-1 flex flex-col justify-between h-full text-zinc-300 font-sans text-xs">
+          {/* Header */}
+          <div className="flex justify-between items-center pb-3 border-b border-white/5 mb-4">
+            <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Review Intelligence Feed</span>
+            <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              LIVE RUNNING
+            </span>
+          </div>
+
+          <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-4 overflow-hidden min-w-0 w-full">
+            {/* Left Part: Score & AI Analysis */}
+            <div className="col-span-12 sm:col-span-7 space-y-4">
+              {/* Score */}
+              <div className="flex items-center gap-4 bg-white/[0.02] border border-white/5 p-3 rounded-xl">
+                <span className="text-3xl font-light text-white font-mono">4.8</span>
+                <div className="flex flex-col">
+                  <div className="flex text-primary text-sm font-bold">★★★★★</div>
+                  <span className="text-[10px] text-zinc-500 font-mono">Based on 147 reviews</span>
+                </div>
+              </div>
+
+              {/* AI Summary */}
+              <div className="bg-zinc-900/40 border border-white/5 p-3 rounded-xl space-y-1.5 relative overflow-hidden">
+                <div className="absolute top-0 left-0 h-[2px] bg-primary w-1/3"></div>
+                <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">interactive consensus</span>
+                <p className="text-[10px] text-zinc-400 font-light leading-relaxed h-[85px] overflow-y-auto scrollbar-thin transition-all duration-300">
+                  {sentimentClusters[selectedCluster]}
+                </p>
+              </div>
+            </div>
+
+            {/* Right Part: Key Clusters & Visuals */}
+            <div className="col-span-12 sm:col-span-5 space-y-3">
+              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">click to analyze</span>
+              <div className="space-y-1 h-[120px] sm:h-[155px] overflow-y-auto pr-1 scrollbar-thin">
+                {[
+                  { label: "Overall Performance", count: 21 },
+                  { label: "Battery Life", count: 24 },
+                  { label: "Screen Quality", count: 19 },
+                  { label: "Portability", count: 17 },
+                  { label: "M3 Chip Speed", count: 14 },
+                  { label: "Build Quality", count: 8 }
+                ].map((tag) => (
+                  <button 
+                    key={tag.label} 
+                    onClick={() => setSelectedCluster(tag.label)}
+                    className={`flex justify-between items-center text-[9px] w-full text-left border px-2 py-1.5 rounded-lg transition-all ${
+                      selectedCluster === tag.label
+                        ? 'bg-primary/10 border-primary/30 text-white font-semibold'
+                        : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
+                    }`}
+                  >
+                    <span className="truncate">✓ {tag.label}</span>
+                    <span className="font-mono font-bold text-[9px] text-primary">{tag.count}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          {/* Bottom Thumbnails */}
+          <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+            <div className="flex gap-2">
+              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG1</div>
+              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG2</div>
+              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG3</div>
+            </div>
+            <span className="text-[9px] font-mono text-zinc-500">Telemetry Feed v1.0.3</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (idx === 1) {
+      return (
+        <div className="flex-1 flex flex-col h-full text-zinc-300 font-sans text-xs">
+          {/* Main Layout Grid */}
+          <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden h-full w-full min-w-0">
+            {/* Left Panel: Documents Referenced */}
+            <div className="col-span-12 sm:col-span-4 sm:border-r border-white/5 sm:pr-4 flex flex-col justify-between min-h-0 mb-4 sm:mb-0 w-full min-w-0 overflow-hidden">
+              <div>
+                <span className="text-[8px] font-mono tracking-wider text-zinc-600 uppercase block mb-2 sm:mb-3">documents referenced</span>
+                
+                {/* Mobile horizontal selector */}
+                <div className="sm:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-none whitespace-nowrap">
+                  {[
+                    "Saudi_Oil_Annual_Report_2024.pdf",
+                    "ME_Upstream_Production_Q4_2024.pdf",
+                    "Saudi_Refinery_Operations_2024.pdf",
+                    "GCC_Energy_Sustainability_Report.pdf",
+                    "Vision2030_Energy_Strategy_KSA.pdf"
+                  ].map((doc, idx) => (
+                    <button 
+                      key={idx} 
+                      onClick={() => handleDocClick(doc)}
+                      className={`inline-block border px-3 py-1.5 rounded-full text-[9px] font-mono transition-all ${
+                        activeDoc === doc
+                          ? 'bg-primary/10 border-primary/30 text-white'
+                          : 'bg-white/[0.01] border-white/5 text-zinc-400'
+                      }`}
+                    >
+                      {doc.split("_")[0]}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Desktop vertical list */}
+                <div className="hidden sm:block space-y-1 h-[210px] overflow-y-auto scrollbar-thin pr-1">
+                  {[
+                    "Saudi_Oil_Annual_Report_2024.pdf",
+                    "ME_Upstream_Production_Q4_2024.pdf",
+                    "Saudi_Refinery_Operations_2024.pdf",
+                    "GCC_Energy_Sustainability_Report.pdf",
+                    "Vision2030_Energy_Strategy_KSA.pdf"
+                  ].map((doc, idx) => (
+                    <button 
+                      key={idx} 
+                      onClick={() => handleDocClick(doc)}
+                      className={`flex items-center gap-2 border p-2 rounded-lg transition-all w-full text-left ${
+                        activeDoc === doc
+                          ? 'bg-primary/5 border-primary/20 text-white'
+                          : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
+                      }`}
+                    >
+                      <span className={`material-symbols-outlined text-[14px] ${activeDoc === doc ? 'text-primary animate-pulse' : 'text-red-400/80'}`}>description</span>
+                      <span className="text-[9px] truncate leading-none font-mono flex-1">{doc}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <button className="hidden sm:flex w-full mt-2 py-2 border border-dashed border-white/10 hover:border-primary/40 rounded-xl text-[9px] font-mono text-zinc-500 hover:text-primary transition-all items-center justify-center gap-1.5">
+                <span className="material-symbols-outlined text-xs">add</span> Add Document
+              </button>
+            </div>
+
+            {/* Right Panel: Chat Assistant Area */}
+            <div className="col-span-12 sm:col-span-8 flex flex-col justify-between h-full pl-0 sm:pl-2 min-h-0 min-w-0 w-full">
+              {/* Chat Top Bar */}
+              <div className="flex justify-between items-center pb-2 border-b border-white/5">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-sm text-primary">deployed_code</span>
+                  <span className="text-[9px] font-mono text-white font-bold">Echo Link // RAG Assistant</span>
+                </div>
+                <span className="text-[8px] font-mono text-zinc-500 bg-white/5 px-2 py-0.5 rounded-full">Personal</span>
+              </div>
+
+              {/* Messages Scroll Area */}
+              <div className="flex-1 overflow-y-auto py-3 space-y-4 pr-1 scrollbar-thin max-h-[140px]">
+                {chatHistory.map((chat, idx) => (
+                  <div key={idx} className={`flex flex-col ${chat.role === 'user' ? 'items-end' : 'items-start space-y-1.5'}`}>
+                    {chat.role === 'assistant' && chat.ref && (
+                      <div className="flex items-center gap-1 bg-zinc-900 border border-white/5 px-2 py-0.5 rounded text-[8px] font-mono text-zinc-500">
+                        <span className="material-symbols-outlined text-[10px] text-zinc-600">bookmark</span>
+                        <span>{chat.ref}</span>
+                      </div>
+                    )}
+                    <div className={`text-[10px] p-2.5 rounded-2xl max-w-[95%] font-light leading-relaxed ${
+                      chat.role === 'user'
+                        ? 'bg-primary/10 border border-primary/20 text-zinc-300 rounded-tr-none'
+                        : 'bg-white/[0.02] border border-white/5 text-zinc-400 rounded-tl-none'
+                    }`}>
+                      {chat.text}
+                    </div>
+                  </div>
+                ))}
+
+                {/* Typing Indicator */}
+                {isTyping && (
+                  <div className="flex flex-col items-start space-y-1">
+                    <span className="text-[8px] font-mono text-zinc-600">Assistant querying index...</span>
+                    <div className="bg-white/[0.02] border border-white/5 p-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Suggested Followups */}
+              <div className="pt-2 border-t border-white/5 space-y-1.5">
+                <span className="text-[8px] font-mono tracking-wider text-zinc-600 uppercase block">suggested questions</span>
+                <div className="space-y-1 h-[45px] overflow-y-auto scrollbar-none">
+                  {[
+                    {
+                      q: "What is the proven hydrocarbon reserve estimate?",
+                      ref: "Saudi_Oil_Annual_Report_2024.pdf Page 12",
+                      ans: "As of late 2024, the region's proven hydrocarbon reserves are estimated at 267.2 billion barrels of oil equivalent."
+                    },
+                    {
+                      q: "Which fields had the highest production increase?",
+                      ref: "ME_Upstream_Production_Q4_2024.pdf Page 3",
+                      ans: "The Safaniya offshore field recorded the highest increase, stepping up by 150,000 bpd following modernization."
+                    }
+                  ].map((f, idx) => (
+                    <button 
+                      key={idx} 
+                      onClick={() => handleQuestionClick(f.q, f.ref, f.ans)}
+                      className="text-[8px] text-primary/80 hover:text-primary leading-tight truncate block text-left w-full transition-colors cursor-pointer"
+                    >
+                      ↳ {f.q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Input Bar */}
+              <div className="mt-3 flex gap-2">
+                <input 
+                  disabled
+                  type="text" 
+                  placeholder="Ask anything about your documents..." 
+                  className="flex-1 bg-zinc-900 border border-white/5 p-2 rounded-xl text-[10px] text-zinc-400 placeholder:text-zinc-600 focus:outline-none"
+                />
+                <button className="bg-primary text-bg-dark text-[9px] font-bold px-3 py-2 rounded-xl font-mono active:scale-95 transition-all">
+                  Ask
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex-1 flex flex-col justify-between h-full text-zinc-300 font-sans text-xs">
+        {/* Top KPIs */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+          {[
+            { label: "Active Calls", value: activeCalls, sub: "Live queue" },
+            { label: "Calls Today", value: callsToday, sub: "+12% vs yest" },
+            { label: "Avg Duration", value: "2:34", sub: "Secs" },
+            { label: "Automation", value: "91.4%", sub: "Resolution" }
+          ].map((kpi, idx) => (
+            <div key={idx} className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center">
+              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-0.5">{kpi.label}</span>
+              <span className="text-xs font-semibold text-white font-mono transition-all duration-300">{kpi.value}</span>
+              <span className="text-[8px] text-zinc-600 block mt-0.5">{kpi.sub}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Main body: Flow graph & Agent */}
+        <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden min-w-0 w-full">
+          {/* Flow Visualization & Interactive Logger */}
+          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full mb-4 sm:mb-0">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">simulation logs</span>
+              <button 
+                onClick={() => setSimulationActive(!simulationActive)}
+                className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all ${
+                  simulationActive
+                    ? 'bg-red-500/10 border-red-500/30 text-red-400'
+                    : 'bg-primary/10 border-primary/30 text-primary'
+                }`}
+              >
+                {simulationActive ? "STOP" : "START"}
+              </button>
+            </div>
+            
+            {/* Live Console Output */}
+            <div className="flex-1 bg-zinc-950 p-2 rounded-lg border border-white/5 font-mono text-[8px] text-zinc-400 overflow-y-auto space-y-1 h-[100px] scrollbar-thin">
+              {simulationLogs.map((log, idx) => (
+                <div key={idx} className="truncate">
+                  <span className="text-zinc-600">&gt;</span> {log}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* AI Sales Agent details */}
+          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 pb-1 border-b border-white/5">
+                <div className="size-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-primary">MT</div>
+                <div>
+                  <span className="text-[9px] text-white block leading-tight font-medium">Marcus Thorne</span>
+                  <span className="text-[8px] text-zinc-500 block leading-tight">Director of Ops</span>
+                </div>
+              </div>
+
+              {/* Lead Snippet */}
+              <div className="bg-zinc-950 p-2 rounded-lg border border-white/5 text-[9px] text-zinc-400 font-light leading-relaxed h-[45px] overflow-y-auto scrollbar-thin">
+                "Hello Marcus! I noticed TechFlow scaled engineering by 40%..."
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 mt-3 text-[9px] font-mono">
+              <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
+                <span className="text-zinc-600 block">LEADS</span>
+                <span className="text-white font-bold">1,284</span>
+              </div>
+              <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
+                <span className="text-zinc-600 block">CONV.</span>
+                <span className="text-white font-bold">18.4%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer details */}
+        <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-zinc-600">
+          <span>Active Workspace: Hospitality Voice</span>
+          <span className="text-primary font-bold animate-pulse">$48k Q3 Projected</span>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="bg-bg-dark min-h-screen text-zinc-300 w-full max-w-full overflow-x-hidden">
+      
+      {/* 1. Header Hero section */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20 pt-28 sm:pt-36 pb-12 sm:pb-16 relative">
+        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end border-b border-white/5 pb-10 gap-8">
+          <div>
+            <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-3">PROPRIETARY SYSTEMS</span>
+            <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white">
+              The AI <span className="text-zinc-600 font-medium">Suite.</span>
+            </h1>
+          </div>
+          <p className="text-zinc-400 text-base md:text-lg font-light max-w-xl border-l border-zinc-800 pl-8 leading-relaxed lg:mb-1">
+            State-of-the-art telemetry, document querying, and voice automation workflows engineered for high-availability enterprise environments.
+          </p>
+        </div>
+      </div>
+
+      {/* 2. Vertical list of products with high-end editorial separation */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20 pb-32 space-y-20 sm:space-y-36">
+        {products.map((p, idx) => {
+          const isAlternate = idx % 2 !== 0;
+          
+          return (
+            <div 
+              key={p.id} 
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center relative py-8 sm:py-12 border-b border-white/5 last:border-0 w-full max-w-full overflow-hidden`}
+            >
+              {/* Product specific background glowing orb — hidden on mobile to prevent overflow */}
+              <div className={`absolute -top-10 ${isAlternate ? 'left-10' : 'right-10'} w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full blur-[120px] pointer-events-none hidden sm:block ${
+                idx === 0 ? 'bg-emerald-500/5' : idx === 1 ? 'bg-primary/5' : 'bg-blue-500/5'
+              }`}></div>
+
+              {/* Details column */}
+              <div className={`col-span-12 lg:col-span-5 flex flex-col justify-center min-w-0 w-full ${
+                isAlternate ? 'lg:order-2' : ''
+              }`}>
+                <div className="space-y-6">
+                  <div>
+                    <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-mono tracking-widest text-primary uppercase inline-block mb-4">
+                      {p.tag}
+                    </span>
+                    <h2 className="text-xl sm:text-2xl md:text-4xl font-light leading-tight tracking-tight text-white break-words">
+                      {p.title}
+                    </h2>
+                  </div>
+
+                  <div className="space-y-5">
+                    <div>
+                      <h5 className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mb-1.5">business problem</h5>
+                      <p className="text-zinc-400 font-light text-[13px] md:text-sm leading-relaxed">{p.problem}</p>
+                    </div>
+                    <div>
+                      <h5 className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mb-1.5">deployed solution</h5>
+                      <p className="text-zinc-400 font-light text-[13px] md:text-sm leading-relaxed">{p.solution}</p>
+                    </div>
+                  </div>
+
+                  {/* Integrated Statistics Grid */}
+                  <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/5">
+                    {p.stats.map(s => (
+                      <div key={s.label} className="flex flex-col min-w-0">
+                        <span className="text-xl sm:text-3xl md:text-4xl font-light text-primary font-mono leading-none mb-1.5">{s.value}</span>
+                        <span className="text-[10px] sm:text-xs md:text-sm font-light text-zinc-400 font-mono leading-tight">{s.suffix}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive Mockup Panel column */}
+              <div className={`col-span-12 lg:col-span-7 flex items-center justify-center relative overflow-hidden min-w-0 w-full ${
+                isAlternate ? 'lg:order-1' : ''
+              }`}>
+                <div className="w-full bg-zinc-950/80 border border-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[400px] sm:min-h-[460px] lg:min-h-[420px] shadow-2xl relative overflow-hidden hover:border-white/10 transition-all duration-500">
+                  {/* Visual Glow */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                  {/* Dashboard Specific Content */}
+                  {renderInteractiveMockup(idx)}
+                </div>
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// 3. CENTRAL EXPORT HANDLER
+const Products: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
+  if (teaser) {
+    return <ProductsTeaser />;
+  }
+  return <ProductsWorkspace />;
+};
+
+export default Products;
