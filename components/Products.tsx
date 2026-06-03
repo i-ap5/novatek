@@ -91,16 +91,16 @@ const ProductsTeaser: React.FC = () => {
   return (
     <section id="products" className="py-32 bg-bg-dark relative overflow-hidden">
       {/* Background ambient light */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/[0.01] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-primary/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
-        
+
         {/* Header Block */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-2xl">
             <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">AI Suite</span>
             <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
-              Proprietary <br /> 
+              Proprietary <br />
               <span className="text-zinc-600 font-light">products.</span>
             </h2>
           </div>
@@ -119,7 +119,7 @@ const ProductsTeaser: React.FC = () => {
                 key={p.id}
                 onMouseEnter={() => setHoveredIdx(idx)}
                 onMouseLeave={() => setHoveredIdx(null)}
-                className="group border-b border-white/5 py-10 transition-all duration-300 hover:bg-white/[0.01] px-4 -mx-4 rounded-lg"
+                className="group border-b border-white/5 py-10 transition-all duration-300 hover:bg-white/[0.01] px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-lg"
               >
                 <Link
                   to="/products"
@@ -148,7 +148,7 @@ const ProductsTeaser: React.FC = () => {
                           <span className="w-[1.5px] bg-primary h-[80%] animate-[pulse_1.2s_infinite_200ms]"></span>
                         </div>
                       )}
-                      
+
                       {/* Micro rating for Sentiment Analysis */}
                       {p.id === "01" && isHovered && (
                         <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">★ 4.8</span>
@@ -185,16 +185,15 @@ const ProductsTeaser: React.FC = () => {
                 </Link>
 
                 {/* Smooth Expanding Specs & Features */}
-                <div 
-                  className={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 overflow-hidden transition-all duration-500 ease-in-out ${
-                    isHovered ? 'max-h-48 opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
-                  }`}
+                <div
+                  className={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 overflow-hidden transition-all duration-500 ease-in-out ${isHovered ? 'max-h-48 opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
+                    }`}
                 >
                   <div className="hidden md:block md:col-span-1" /> {/* Spacer */}
                   <div className="col-span-1 md:col-span-11 flex flex-wrap gap-2 text-[9px] font-mono">
                     {p.features.map((feat, fIdx) => (
-                      <span 
-                        key={fIdx} 
+                      <span
+                        key={fIdx}
                         className="border border-white/5 bg-zinc-900/40 text-zinc-400 px-3 py-1 rounded-full hover:border-primary/10 transition-colors"
                       >
                         {feat}
@@ -210,8 +209,8 @@ const ProductsTeaser: React.FC = () => {
 
         {/* CTA */}
         <div className="mt-20 flex justify-center">
-          <Link 
-            to="/products" 
+          <Link
+            to="/products"
             className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-sans font-semibold text-xs tracking-wider py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
           >
             Explore our products
@@ -276,7 +275,7 @@ const ProductsWorkspace: React.FC = () => {
   const handleQuestionClick = (qText: string, refDoc: string, refText: string) => {
     if (isTyping) return;
     setIsTyping(true);
-    
+
     setChatHistory(prev => [...prev, { role: 'user', text: qText }]);
 
     setTimeout(() => {
@@ -328,11 +327,11 @@ const ProductsWorkspace: React.FC = () => {
   const renderInteractiveMockup = (idx: number) => {
     if (idx === 0) {
       return (
-        <div className="flex-1 flex flex-col justify-between h-full text-zinc-300 font-sans text-xs">
+        <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
           {/* Header */}
-          <div className="flex justify-between items-center pb-3 border-b border-white/5 mb-4">
-            <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">Review Intelligence Feed</span>
-            <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1.5">
+          <div className="flex flex-wrap justify-between items-center gap-2 pb-3 border-b border-white/5 mb-4">
+            <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase min-w-0 truncate">Review Intelligence Feed</span>
+            <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1.5 shrink-0">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -343,7 +342,7 @@ const ProductsWorkspace: React.FC = () => {
 
           <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-4 overflow-hidden min-w-0 w-full">
             {/* Left Part: Score & AI Analysis */}
-            <div className="col-span-12 sm:col-span-7 space-y-4">
+            <div className="col-span-12 sm:col-span-7 space-y-4 min-w-0 w-full">
               {/* Score */}
               <div className="flex items-center gap-4 bg-white/[0.02] border border-white/5 p-3 rounded-xl">
                 <span className="text-3xl font-light text-white font-mono">4.8</span>
@@ -364,7 +363,7 @@ const ProductsWorkspace: React.FC = () => {
             </div>
 
             {/* Right Part: Key Clusters & Visuals */}
-            <div className="col-span-12 sm:col-span-5 space-y-3">
+            <div className="col-span-12 sm:col-span-5 space-y-3 min-w-0 w-full">
               <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">click to analyze</span>
               <div className="space-y-1 h-[120px] sm:h-[155px] overflow-y-auto pr-1 scrollbar-thin">
                 {[
@@ -375,14 +374,13 @@ const ProductsWorkspace: React.FC = () => {
                   { label: "M3 Chip Speed", count: 14 },
                   { label: "Build Quality", count: 8 }
                 ].map((tag) => (
-                  <button 
-                    key={tag.label} 
+                  <button
+                    key={tag.label}
                     onClick={() => setSelectedCluster(tag.label)}
-                    className={`flex justify-between items-center text-[9px] w-full text-left border px-2 py-1.5 rounded-lg transition-all ${
-                      selectedCluster === tag.label
+                    className={`flex justify-between items-center text-[9px] w-full text-left border px-2 py-1.5 rounded-lg transition-all ${selectedCluster === tag.label
                         ? 'bg-primary/10 border-primary/30 text-white font-semibold'
                         : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
-                    }`}
+                      }`}
                   >
                     <span className="truncate">✓ {tag.label}</span>
                     <span className="font-mono font-bold text-[9px] text-primary">{tag.count}</span>
@@ -391,15 +389,15 @@ const ProductsWorkspace: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Bottom Thumbnails */}
-          <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-3 items-center justify-between">
             <div className="flex gap-2">
               <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG1</div>
               <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG2</div>
               <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG3</div>
             </div>
-            <span className="text-[9px] font-mono text-zinc-500">Telemetry Feed v1.0.3</span>
+            <span className="text-[9px] font-mono text-zinc-500 truncate">Telemetry Feed v1.0.3</span>
           </div>
         </div>
       );
@@ -407,16 +405,16 @@ const ProductsWorkspace: React.FC = () => {
 
     if (idx === 1) {
       return (
-        <div className="flex-1 flex flex-col h-full text-zinc-300 font-sans text-xs">
+        <div className="flex-1 flex flex-col text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
           {/* Main Layout Grid */}
           <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden h-full w-full min-w-0">
             {/* Left Panel: Documents Referenced */}
             <div className="col-span-12 sm:col-span-4 sm:border-r border-white/5 sm:pr-4 flex flex-col justify-between min-h-0 mb-4 sm:mb-0 w-full min-w-0 overflow-hidden">
               <div>
                 <span className="text-[8px] font-mono tracking-wider text-zinc-600 uppercase block mb-2 sm:mb-3">documents referenced</span>
-                
+
                 {/* Mobile horizontal selector */}
-                <div className="sm:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-none whitespace-nowrap">
+                <div className="sm:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-none whitespace-nowrap w-full max-w-full min-w-0">
                   {[
                     "Saudi_Oil_Annual_Report_2024.pdf",
                     "ME_Upstream_Production_Q4_2024.pdf",
@@ -424,14 +422,13 @@ const ProductsWorkspace: React.FC = () => {
                     "GCC_Energy_Sustainability_Report.pdf",
                     "Vision2030_Energy_Strategy_KSA.pdf"
                   ].map((doc, idx) => (
-                    <button 
-                      key={idx} 
+                    <button
+                      key={idx}
                       onClick={() => handleDocClick(doc)}
-                      className={`inline-block border px-3 py-1.5 rounded-full text-[9px] font-mono transition-all ${
-                        activeDoc === doc
+                      className={`inline-block border px-3 py-1.5 rounded-full text-[9px] font-mono transition-all ${activeDoc === doc
                           ? 'bg-primary/10 border-primary/30 text-white'
                           : 'bg-white/[0.01] border-white/5 text-zinc-400'
-                      }`}
+                        }`}
                     >
                       {doc.split("_")[0]}
                     </button>
@@ -447,17 +444,16 @@ const ProductsWorkspace: React.FC = () => {
                     "GCC_Energy_Sustainability_Report.pdf",
                     "Vision2030_Energy_Strategy_KSA.pdf"
                   ].map((doc, idx) => (
-                    <button 
-                      key={idx} 
+                    <button
+                      key={idx}
                       onClick={() => handleDocClick(doc)}
-                      className={`flex items-center gap-2 border p-2 rounded-lg transition-all w-full text-left ${
-                        activeDoc === doc
+                      className={`flex items-center gap-2 border p-2 rounded-lg transition-all w-full text-left ${activeDoc === doc
                           ? 'bg-primary/5 border-primary/20 text-white'
                           : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
-                      }`}
+                        }`}
                     >
                       <span className={`material-symbols-outlined text-[14px] ${activeDoc === doc ? 'text-primary animate-pulse' : 'text-red-400/80'}`}>description</span>
-                      <span className="text-[9px] truncate leading-none font-mono flex-1">{doc}</span>
+                      <span className="text-[9px] truncate leading-none font-mono flex-1 min-w-0">{doc}</span>
                     </button>
                   ))}
                 </div>
@@ -470,12 +466,12 @@ const ProductsWorkspace: React.FC = () => {
             {/* Right Panel: Chat Assistant Area */}
             <div className="col-span-12 sm:col-span-8 flex flex-col justify-between h-full pl-0 sm:pl-2 min-h-0 min-w-0 w-full">
               {/* Chat Top Bar */}
-              <div className="flex justify-between items-center pb-2 border-b border-white/5">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm text-primary">deployed_code</span>
-                  <span className="text-[9px] font-mono text-white font-bold">Echo Link // RAG Assistant</span>
+              <div className="flex justify-between items-center gap-2 pb-2 border-b border-white/5">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <span className="material-symbols-outlined text-sm text-primary shrink-0">deployed_code</span>
+                  <span className="text-[9px] font-mono text-white font-bold truncate">Echo Link // RAG Assistant</span>
                 </div>
-                <span className="text-[8px] font-mono text-zinc-500 bg-white/5 px-2 py-0.5 rounded-full">Personal</span>
+                <span className="text-[8px] font-mono text-zinc-500 bg-white/5 px-2 py-0.5 rounded-full shrink-0">Personal</span>
               </div>
 
               {/* Messages Scroll Area */}
@@ -483,16 +479,15 @@ const ProductsWorkspace: React.FC = () => {
                 {chatHistory.map((chat, idx) => (
                   <div key={idx} className={`flex flex-col ${chat.role === 'user' ? 'items-end' : 'items-start space-y-1.5'}`}>
                     {chat.role === 'assistant' && chat.ref && (
-                      <div className="flex items-center gap-1 bg-zinc-900 border border-white/5 px-2 py-0.5 rounded text-[8px] font-mono text-zinc-500">
-                        <span className="material-symbols-outlined text-[10px] text-zinc-600">bookmark</span>
-                        <span>{chat.ref}</span>
+                      <div className="flex items-center gap-1 bg-zinc-900 border border-white/5 px-2 py-0.5 rounded text-[8px] font-mono text-zinc-500 max-w-full overflow-hidden">
+                        <span className="material-symbols-outlined text-[10px] text-zinc-600 shrink-0">bookmark</span>
+                        <span className="truncate">{chat.ref}</span>
                       </div>
                     )}
-                    <div className={`text-[10px] p-2.5 rounded-2xl max-w-[95%] font-light leading-relaxed ${
-                      chat.role === 'user'
+                    <div className={`text-[10px] p-2.5 rounded-2xl max-w-[95%] font-light leading-relaxed ${chat.role === 'user'
                         ? 'bg-primary/10 border border-primary/20 text-zinc-300 rounded-tr-none'
                         : 'bg-white/[0.02] border border-white/5 text-zinc-400 rounded-tl-none'
-                    }`}>
+                      }`}>
                       {chat.text}
                     </div>
                   </div>
@@ -527,8 +522,8 @@ const ProductsWorkspace: React.FC = () => {
                       ans: "The Safaniya offshore field recorded the highest increase, stepping up by 150,000 bpd following modernization."
                     }
                   ].map((f, idx) => (
-                    <button 
-                      key={idx} 
+                    <button
+                      key={idx}
                       onClick={() => handleQuestionClick(f.q, f.ref, f.ans)}
                       className="text-[8px] text-primary/80 hover:text-primary leading-tight truncate block text-left w-full transition-colors cursor-pointer"
                     >
@@ -539,14 +534,14 @@ const ProductsWorkspace: React.FC = () => {
               </div>
 
               {/* Input Bar */}
-              <div className="mt-3 flex gap-2">
-                <input 
+              <div className="mt-3 flex gap-2 w-full min-w-0">
+                <input
                   disabled
-                  type="text" 
-                  placeholder="Ask anything about your documents..." 
-                  className="flex-1 bg-zinc-900 border border-white/5 p-2 rounded-xl text-[10px] text-zinc-400 placeholder:text-zinc-600 focus:outline-none"
+                  type="text"
+                  placeholder="Ask anything about your documents..."
+                  className="flex-1 bg-zinc-900 border border-white/5 p-2 rounded-xl text-[10px] text-zinc-400 placeholder:text-zinc-600 focus:outline-none min-w-0 w-full"
                 />
-                <button className="bg-primary text-bg-dark text-[9px] font-bold px-3 py-2 rounded-xl font-mono active:scale-95 transition-all">
+                <button className="bg-primary text-bg-dark text-[9px] font-bold px-3 py-2 rounded-xl font-mono active:scale-95 transition-all shrink-0">
                   Ask
                 </button>
               </div>
@@ -557,19 +552,19 @@ const ProductsWorkspace: React.FC = () => {
     }
 
     return (
-      <div className="flex-1 flex flex-col justify-between h-full text-zinc-300 font-sans text-xs">
+      <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
         {/* Top KPIs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 w-full min-w-0">
           {[
             { label: "Active Calls", value: activeCalls, sub: "Live queue" },
             { label: "Calls Today", value: callsToday, sub: "+12% vs yest" },
             { label: "Avg Duration", value: "2:34", sub: "Secs" },
             { label: "Automation", value: "91.4%", sub: "Resolution" }
           ].map((kpi, idx) => (
-            <div key={idx} className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center">
-              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-0.5">{kpi.label}</span>
-              <span className="text-xs font-semibold text-white font-mono transition-all duration-300">{kpi.value}</span>
-              <span className="text-[8px] text-zinc-600 block mt-0.5">{kpi.sub}</span>
+            <div key={idx} className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center min-w-0">
+              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-0.5 truncate">{kpi.label}</span>
+              <span className="text-xs font-semibold text-white font-mono transition-all duration-300 truncate">{kpi.value}</span>
+              <span className="text-[8px] text-zinc-600 block mt-0.5 truncate">{kpi.sub}</span>
             </div>
           ))}
         </div>
@@ -577,21 +572,20 @@ const ProductsWorkspace: React.FC = () => {
         {/* Main body: Flow graph & Agent */}
         <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden min-w-0 w-full">
           {/* Flow Visualization & Interactive Logger */}
-          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full mb-4 sm:mb-0">
+          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full mb-4 sm:mb-0 min-w-0 w-full">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">simulation logs</span>
-              <button 
+              <button
                 onClick={() => setSimulationActive(!simulationActive)}
-                className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all ${
-                  simulationActive
+                className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all ${simulationActive
                     ? 'bg-red-500/10 border-red-500/30 text-red-400'
                     : 'bg-primary/10 border-primary/30 text-primary'
-                }`}
+                  }`}
               >
                 {simulationActive ? "STOP" : "START"}
               </button>
             </div>
-            
+
             {/* Live Console Output */}
             <div className="flex-1 bg-zinc-950 p-2 rounded-lg border border-white/5 font-mono text-[8px] text-zinc-400 overflow-y-auto space-y-1 h-[100px] scrollbar-thin">
               {simulationLogs.map((log, idx) => (
@@ -603,13 +597,13 @@ const ProductsWorkspace: React.FC = () => {
           </div>
 
           {/* AI Sales Agent details */}
-          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 pb-1 border-b border-white/5">
-                <div className="size-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-primary">MT</div>
-                <div>
-                  <span className="text-[9px] text-white block leading-tight font-medium">Marcus Thorne</span>
-                  <span className="text-[8px] text-zinc-500 block leading-tight">Director of Ops</span>
+          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full min-w-0 w-full">
+            <div className="space-y-3 min-w-0">
+              <div className="flex items-center gap-2 pb-1 border-b border-white/5 min-w-0">
+                <div className="size-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-primary shrink-0">MT</div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[9px] text-white block leading-tight font-medium truncate">Marcus Thorne</span>
+                  <span className="text-[8px] text-zinc-500 block leading-tight truncate">Director of Ops</span>
                 </div>
               </div>
 
@@ -633,26 +627,26 @@ const ProductsWorkspace: React.FC = () => {
         </div>
 
         {/* Footer details */}
-        <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-zinc-600">
-          <span>Active Workspace: Hospitality Voice</span>
-          <span className="text-primary font-bold animate-pulse">$48k Q3 Projected</span>
+        <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-2 justify-between items-center text-[9px] font-mono text-zinc-600 w-full min-w-0">
+          <span className="truncate flex-1 text-left">Active Workspace: Hospitality Voice</span>
+          <span className="text-primary font-bold animate-pulse shrink-0">$48k Q3 Projected</span>
         </div>
       </div>
     );
   };
 
   return (
-    <div className="bg-bg-dark min-h-screen text-zinc-300 w-full max-w-full overflow-x-hidden">
-      
+    <div className="bg-bg-dark min-h-screen text-zinc-300 w-full max-w-full overflow-hidden">
+
       {/* 1. Header Hero section */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-20 pt-28 sm:pt-36 pb-12 sm:pb-16 relative">
-        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
-        
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-20 pt-28 sm:pt-36 pb-12 sm:pb-16 relative">
+        <div className="absolute top-10 left-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end border-b border-white/5 pb-10 gap-8">
           <div>
-            <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-3">PROPRIETARY SYSTEMS</span>
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">PROPRIETARY SYSTEMS</span>
             <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white">
-              The AI <span className="text-zinc-600 font-medium">Suite.</span>
+              The AI <span className="text-zinc-650 font-medium">Suite.</span>
             </h1>
           </div>
           <p className="text-zinc-400 text-base md:text-lg font-light max-w-xl border-l border-zinc-800 pl-8 leading-relaxed lg:mb-1">
@@ -662,24 +656,22 @@ const ProductsWorkspace: React.FC = () => {
       </div>
 
       {/* 2. Vertical list of products with high-end editorial separation */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-20 pb-32 space-y-20 sm:space-y-36">
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-20 pb-32 space-y-20 sm:space-y-36">
         {products.map((p, idx) => {
           const isAlternate = idx % 2 !== 0;
-          
+
           return (
-            <div 
-              key={p.id} 
-              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center relative py-8 sm:py-12 border-b border-white/5 last:border-0 w-full max-w-full overflow-hidden`}
+            <div
+              key={p.id}
+              className={`grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center relative py-8 sm:py-12 border-b border-white/5 last:border-0 w-full max-w-full min-w-0 overflow-hidden`}
             >
               {/* Product specific background glowing orb — hidden on mobile to prevent overflow */}
-              <div className={`absolute -top-10 ${isAlternate ? 'left-10' : 'right-10'} w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full blur-[120px] pointer-events-none hidden sm:block ${
-                idx === 0 ? 'bg-emerald-500/5' : idx === 1 ? 'bg-primary/5' : 'bg-blue-500/5'
-              }`}></div>
+              <div className={`absolute -top-10 ${isAlternate ? 'left-10' : 'right-10'} w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full blur-[120px] pointer-events-none hidden sm:block ${idx === 0 ? 'bg-emerald-500/5' : idx === 1 ? 'bg-primary/5' : 'bg-blue-500/5'
+                }`}></div>
 
               {/* Details column */}
-              <div className={`col-span-12 lg:col-span-5 flex flex-col justify-center min-w-0 w-full ${
-                isAlternate ? 'lg:order-2' : ''
-              }`}>
+              <div className={`col-span-1 lg:col-span-5 flex flex-col justify-center min-w-0 w-full ${isAlternate ? 'lg:order-2' : ''
+                }`}>
                 <div className="space-y-6">
                   <div>
                     <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-mono tracking-widest text-primary uppercase inline-block mb-4">
@@ -702,11 +694,11 @@ const ProductsWorkspace: React.FC = () => {
                   </div>
 
                   {/* Integrated Statistics Grid */}
-                  <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-white/5">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-6 pt-6 border-t border-white/5 w-full min-w-0">
                     {p.stats.map(s => (
                       <div key={s.label} className="flex flex-col min-w-0">
-                        <span className="text-xl sm:text-3xl md:text-4xl font-light text-primary font-mono leading-none mb-1.5">{s.value}</span>
-                        <span className="text-[10px] sm:text-xs md:text-sm font-light text-zinc-400 font-mono leading-tight">{s.suffix}</span>
+                        <span className="text-lg sm:text-3xl md:text-4xl font-light text-primary font-mono leading-none mb-1.5">{s.value}</span>
+                        <span className="text-[9px] sm:text-xs md:text-sm font-light text-zinc-400 font-mono leading-tight truncate">{s.suffix}</span>
                       </div>
                     ))}
                   </div>
@@ -714,10 +706,9 @@ const ProductsWorkspace: React.FC = () => {
               </div>
 
               {/* Interactive Mockup Panel column */}
-              <div className={`col-span-12 lg:col-span-7 flex items-center justify-center relative overflow-hidden min-w-0 w-full ${
-                isAlternate ? 'lg:order-1' : ''
-              }`}>
-                <div className="w-full bg-zinc-950/80 border border-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[400px] sm:min-h-[460px] lg:min-h-[420px] shadow-2xl relative overflow-hidden hover:border-white/10 transition-all duration-500">
+              <div className={`col-span-1 lg:col-span-7 flex items-center justify-center relative overflow-hidden min-w-0 w-full ${isAlternate ? 'lg:order-1' : ''
+                }`}>
+                <div className="w-full max-w-full bg-zinc-950/80 border border-white/5 rounded-2xl sm:rounded-3xl p-3 sm:p-6 md:p-8 flex flex-col justify-between min-h-[400px] sm:min-h-[460px] lg:min-h-[420px] shadow-2xl relative overflow-hidden hover:border-white/10 transition-all duration-500">
                   {/* Visual Glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
 

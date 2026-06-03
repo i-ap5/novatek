@@ -84,14 +84,14 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToHash />
-      <div className="relative bg-bg-dark min-h-screen selection:bg-primary selection:text-bg-dark">
+      <div className="relative bg-bg-dark min-h-screen selection:bg-primary selection:text-bg-dark w-full max-w-full overflow-x-hidden">
         {/* Lightweight grain texture — static image instead of live SVG filter */}
         <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100]" style={{ backgroundImage: 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAElBMVEUAAAAAAAAAAAAAAAAAAAAAAADgKxmiAAAABnRSTlMCBggKDA6u9PEIAAAASUlEQVQ4y2NghgIGBgYWBgYGFxgDA4sDAwOLCwODgwsDA0MLAwNDCwMDQwsDg0MLiM3CwMLg4ABiO4DZLGAGCxjBAGazMIyKDCYAAD+lBzFE24P2AAAAAElFTkSuQmCC")', backgroundRepeat: 'repeat', backgroundSize: '48px 48px' }}></div>
         <div className="fixed inset-0 pointer-events-none grid-blueprint z-0 opacity-[0.04]"></div>
 
         <Navbar />
 
-        <main className="relative z-10">
+        <main className="relative z-10 w-full max-w-full overflow-x-hidden">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/portfolio" element={<Portfolio teaser={false} />} />

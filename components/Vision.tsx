@@ -5,13 +5,13 @@ const Vision: React.FC = () => {
   return (
     <section className="border-t border-border-light">
       <div className="max-w-[1400px] mx-auto px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2">
-        <div className="p-6 md:p-24 border-b lg:border-b-0 lg:border-r border-border-light flex flex-col justify-between min-h-[300px] md:aspect-square lg:aspect-auto">
+        <div className="py-16 md:py-24 pr-0 lg:pr-16 pl-0 border-b lg:border-b-0 lg:border-r border-border-light flex flex-col justify-start min-h-[300px] lg:aspect-auto">
           <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Vision</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight mt-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight">
             we build for the next <span className="text-zinc-650 font-light">decade</span>, not the next quarter.
           </h2>
         </div>
-        <div className="p-6 md:p-24 bg-zinc-900/5 space-y-12">
+        <div className="py-16 md:py-24 pl-0 lg:pl-16 pr-0 space-y-12">
           <div className="space-y-6">
             <h4 className="text-white text-lg font-sans font-semibold tracking-wide">Focus on Quality</h4>
             <p className="text-zinc-500 font-light leading-relaxed">

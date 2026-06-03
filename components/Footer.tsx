@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
       
         <div className="max-w-[1400px] mx-auto mt-16 md:mt-24 pt-6 md:pt-8 border-t border-white/5
                 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6
-                text-[9px] md:text-[10px] text-zinc-700 font-bold tracking-[0.2em] uppercase">
+                text-[9px] md:text-[10px] text-zinc-500 font-bold tracking-[0.2em] uppercase">
 
             {/* Left block */}
             <div className="flex flex-col items-center md:items-start gap-1">
@@ -75,23 +75,13 @@ const Footer: React.FC = () => {
                 Designed by{" "}
                 <a
                   href="https://trowcode.com"
-                  className="hover:text-zinc-500 transition-colors"
+                  className="text-zinc-200 hover:text-primary transition-colors font-bold"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Trowcode
                 </a>
               </span>
-            </div>
-
-            {/* Right links */}
-            <div className="flex items-center gap-4">
-              <a href="#" className="hover:text-zinc-500 transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-zinc-500 transition-colors">
-                Terms of Service
-              </a>
             </div>
           </div>
 

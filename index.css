@@ -24,6 +24,13 @@
 }
 
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
   body {
     background-color: var(--color-bg-dark);
     color: var(--color-zinc-300);
@@ -31,11 +38,39 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  #root {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+  }
+  /* Prevent any element from exceeding viewport on mobile */
+  img, video, canvas, svg, iframe {
+    max-width: 100%;
+    height: auto;
   }
   h1, h2, h3, h4 {
     color: white;
     font-weight: 600;
     letter-spacing: -0.025em;
+  }
+  /* iOS Safari containment — overflow-x:hidden on body alone does NOT work */
+  main {
+    position: relative;
+    overflow: clip;
+    max-width: 100%;
+  }
+}
+
+/* Mobile viewport clamp for specific overflowing text types */
+@media (max-width: 640px) {
+  .font-mono {
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
 }
 
