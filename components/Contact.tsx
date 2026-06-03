@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', projectScope: '' });
-  const [errors, setErrors] = useState<{ name?: string; email?: string; projectScope?: string }>({});
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', projectScope: '' });
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; projectScope?: string }>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -14,6 +14,9 @@ const Contact: React.FC = () => {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Invalid email address';
+    }
+    if (formData.phone.trim() && !/^[+]*[0-9\s-]{6,15}$/.test(formData.phone.trim())) {
+      newErrors.phone = 'Invalid phone number';
     }
     if (!formData.projectScope.trim()) newErrors.projectScope = 'Project scope is required';
     setErrors(newErrors);
@@ -29,7 +32,7 @@ const Contact: React.FC = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({ name: '', email: '', projectScope: '' });
+    setFormData({ name: '', email: '', phone: '', projectScope: '' });
   };
 
   return (
@@ -42,7 +45,7 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-primary font-bold text-[10px] md:text-xs tracking-[0.4em] uppercase block mb-6"
+            className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono"
           >
             Connect Us
           </motion.span>
@@ -51,20 +54,30 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-light tracking-tight text-white mb-10 md:mb-12 leading-[0.9]"
+            className="text-5xl md:text-7xl font-light tracking-tight text-white mb-6 leading-none"
           >
-            Let's <span className="text-zinc-600 font-medium">talk.</span>
+            Let's <span className="text-zinc-600 font-light">talk.</span>
           </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-zinc-550 font-light text-base leading-relaxed mb-10 max-w-md"
+          >
+            Have a project in mind, want to work together, or just want to say hello? Fill out the form and we'll get back to you shortly.
+          </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8 md:gap-12">
             <div>                      
-              <p className="text-zinc-600 font-mono text-[9px] tracking-[0.4em] uppercase mb-3">Inquiries</p>
+              <p className="text-zinc-650 font-mono text-[9px] tracking-[0.4em] uppercase mb-3">Inquiries</p>
               <a href="mailto:info@novateksolutions.in" className="text-xl md:text-2xl font-light text-white hover:text-primary transition-colors break-all">
                 info@novateksolutions.in
               </a>
             </div>
             <div>
-              <p className="text-zinc-600 font-mono text-[9px] tracking-[0.4em] uppercase mb-3">Location</p>
+              <p className="text-zinc-650 font-mono text-[9px] tracking-[0.4em] uppercase mb-3">Location</p>
               <p className="text-xl md:text-2xl font-light text-white">Thanisandra / Bengaluru</p>
             </div>
           </div>
@@ -75,13 +88,8 @@ const Contact: React.FC = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-bg-surface/95 p-8 md:p-12 border border-white/10 relative min-h-[480px] flex flex-col justify-center"
+          className="relative flex flex-col justify-center"
         >
-          {/* Decorative Icon */}
-          <div className="absolute top-0 right-0 p-6 md:p-8 hidden sm:block">
-            <span className="material-symbols-outlined text-primary/10 text-5xl md:text-6xl">chat_bubble</span>
-          </div>
-
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
               <motion.form 
@@ -94,8 +102,8 @@ const Contact: React.FC = () => {
                 onSubmit={handleSubmit}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-                  <div className={`space-y-2 border-b pb-3 focus-within:border-primary transition-colors ${errors.name ? 'border-red-500/50' : 'border-zinc-800'}`}>
-                    <label className="font-mono text-[9px] text-zinc-600 uppercase tracking-widest flex justify-between">
+                  <div className={`group space-y-2 border-b pb-3 transition-colors duration-500 ${errors.name ? 'border-red-500/50' : 'border-white/5 focus-within:border-primary'}`}>
+                    <label className="font-mono text-[9px] text-zinc-650 group-focus-within:text-primary transition-colors duration-500 uppercase tracking-widest flex justify-between">
                       <span>Name</span>
                       {errors.name && <span className="text-red-500 font-mono lowercase normal-case tracking-normal">{errors.name}</span>}
                     </label>
@@ -106,13 +114,13 @@ const Contact: React.FC = () => {
                         setFormData({ ...formData, name: e.target.value });
                         if (errors.name) setErrors({ ...errors, name: undefined });
                       }}
-                      className="w-full bg-transparent border-none focus:ring-0 text-white p-0 text-base md:text-lg placeholder:text-zinc-500" 
+                      className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-white p-0 text-base placeholder:text-zinc-700" 
                       placeholder="Type your name" 
                     />
                   </div>
                   
-                  <div className={`space-y-2 border-b pb-3 focus-within:border-primary transition-colors ${errors.email ? 'border-red-500/50' : 'border-zinc-800'}`}>
-                    <label className="font-mono text-[9px] text-zinc-600 uppercase tracking-widest flex justify-between">
+                  <div className={`group space-y-2 border-b pb-3 transition-colors duration-500 ${errors.email ? 'border-red-500/50' : 'border-white/5 focus-within:border-primary'}`}>
+                    <label className="font-mono text-[9px] text-zinc-650 group-focus-within:text-primary transition-colors duration-500 uppercase tracking-widest flex justify-between">
                       <span>Email Address</span>
                       {errors.email && <span className="text-red-500 font-mono lowercase normal-case tracking-normal">{errors.email}</span>}
                     </label>
@@ -123,14 +131,31 @@ const Contact: React.FC = () => {
                         setFormData({ ...formData, email: e.target.value });
                         if (errors.email) setErrors({ ...errors, email: undefined });
                       }}
-                      className="w-full bg-transparent border-none focus:ring-0 text-white p-0 text-base md:text-lg placeholder:text-zinc-500" 
-                      placeholder="Enter Email" 
+                      className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-white p-0 text-base placeholder:text-zinc-700" 
+                      placeholder="Enter email" 
+                    />
+                  </div>
+
+                  <div className={`group space-y-2 border-b pb-3 transition-colors duration-500 md:col-span-2 ${errors.phone ? 'border-red-500/50' : 'border-white/5 focus-within:border-primary'}`}>
+                    <label className="font-mono text-[9px] text-zinc-650 group-focus-within:text-primary transition-colors duration-500 uppercase tracking-widest flex justify-between">
+                      <span>Phone Number (Optional)</span>
+                      {errors.phone && <span className="text-red-500 font-mono lowercase normal-case tracking-normal">{errors.phone}</span>}
+                    </label>
+                    <input 
+                      type="tel" 
+                      value={formData.phone}
+                      onChange={(e) => {
+                        setFormData({ ...formData, phone: e.target.value });
+                        if (errors.phone) setErrors({ ...errors, phone: undefined });
+                      }}
+                      className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-white p-0 text-base placeholder:text-zinc-700" 
+                      placeholder="Enter phone number" 
                     />
                   </div>
                 </div>
                 
-                <div className={`space-y-2 border-b pb-3 focus-within:border-primary transition-colors ${errors.projectScope ? 'border-red-500/50' : 'border-zinc-800'}`}>
-                  <label className="font-mono text-[9px] text-zinc-600 uppercase tracking-widest flex justify-between">
+                <div className={`group space-y-2 border-b pb-3 transition-colors duration-500 ${errors.projectScope ? 'border-red-500/50' : 'border-white/5 focus-within:border-primary'}`}>
+                  <label className="font-mono text-[9px] text-zinc-650 group-focus-within:text-primary transition-colors duration-500 uppercase tracking-widest flex justify-between">
                     <span>Project Scope</span>
                     {errors.projectScope && <span className="text-red-500 font-mono lowercase normal-case tracking-normal">{errors.projectScope}</span>}
                   </label>
@@ -140,23 +165,26 @@ const Contact: React.FC = () => {
                       setFormData({ ...formData, projectScope: e.target.value });
                       if (errors.projectScope) setErrors({ ...errors, projectScope: undefined });
                     }}
-                    className="w-full bg-transparent border-none focus:ring-0 text-white p-0 text-base md:text-lg h-24 md:h-32 resize-none placeholder:text-zinc-500" 
-                    placeholder="Describe the Infrastructure Challenge"
+                    className="w-full bg-transparent border-none focus:ring-0 focus:outline-none text-white p-0 text-base h-24 resize-none placeholder:text-zinc-700" 
+                    placeholder="Describe the challenge"
                   />
                 </div>
 
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-6 md:py-8 bg-primary text-bg-dark font-bold text-xs md:text-sm tracking-[0.4em] md:tracking-[0.5em] uppercase hover:bg-white transition-all active:scale-[0.98] flex items-center justify-center gap-3 disabled:opacity-55"
+                  className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-sans font-semibold text-xs tracking-wider py-4 px-8 rounded-full transition-all duration-300 flex items-center justify-center gap-3 w-fit active:scale-95 disabled:opacity-50 cursor-pointer mt-4"
                 >
                   {isSubmitting ? (
                     <>
-                      <span className="material-symbols-outlined animate-spin text-sm">refresh</span>
-                      Sending...
+                      <span className="material-symbols-outlined animate-spin text-xs">refresh</span>
+                      <span>Sending...</span>
                     </>
                   ) : (
-                    'Send Message'
+                    <>
+                      <span>Send Message</span>
+                      <span className="material-symbols-outlined text-xs group-hover:translate-x-1.5 transition-transform">east</span>
+                    </>
                   )}
                 </button>
               </motion.form>
@@ -166,20 +194,20 @@ const Contact: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="text-center py-12 flex flex-col items-center justify-center space-y-6 relative z-10"
+                className="text-left py-12 flex flex-col justify-center space-y-6 relative z-10"
               >
-                <div className="size-20 rounded-full border-2 border-primary flex items-center justify-center mb-4 bg-primary/10 shadow-[0_0_20px_rgba(228,181,56,0.2)] animate-pulse">
-                  <span className="material-symbols-outlined text-primary text-4xl font-bold">check</span>
+                <div className="size-16 rounded-full border border-primary/30 flex items-center justify-center mb-4 bg-primary/5 shadow-lg shadow-primary/5">
+                  <span className="material-symbols-outlined text-primary text-2xl">check</span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Transmission Received</h3>
-                <p className="text-zinc-400 text-sm max-w-sm leading-relaxed font-light">
+                <h3 className="text-3xl font-light text-white tracking-tight">Transmission Received</h3>
+                <p className="text-zinc-500 text-sm max-w-sm leading-relaxed font-light">
                   Thank you. Our engineering team has received your query. A Lead Architect will reach out to you within 12 business hours.
                 </p>
                 <button 
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-6 border border-white/10 hover:border-primary/50 text-white hover:text-primary px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300"
+                  className="group border border-white/10 hover:border-primary bg-transparent text-white hover:text-bg-dark font-sans font-semibold text-xs tracking-wider py-3 px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-2 w-fit cursor-pointer"
                 >
-                  Send another message
+                  <span>Send another message</span>
                 </button>
               </motion.div>
             )}

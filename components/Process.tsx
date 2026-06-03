@@ -1,55 +1,72 @@
-
 import React from 'react';
 
 const Process: React.FC = () => {
   const steps = [
-    { id: '01', title: 'Discovery', desc: 'We analyze your business goals, target audience, and existing technical systems.', tags: ['PLANNING', 'AUDIT'] },
-    { id: '02', title: 'Design', desc: 'We create clear system blueprints and map out the visual user flows.', tags: ['BLUEPRINT', 'WORKFLOW'] },
-    { id: '03', title: 'Development', desc: 'We write clean, optimized code and launch using automated, secure systems.', tags: ['DEVELOP', 'LAUNCH'] },
-    { id: '04', title: 'Testing', desc: 'We run thorough security checks and load tests to ensure complete stability.', tags: ['SECURITY', 'TESTING'] }
+    { id: '01', title: 'Discovery', desc: 'We analyze your business goals, target audience, and existing technical systems.', tags: ['Planning', 'Audit'] },
+    { id: '02', title: 'Design', desc: 'We create clear system blueprints and map out the visual user flows.', tags: ['Blueprint', 'Workflow'] },
+    { id: '03', title: 'Development', desc: 'We write clean, optimized code and launch using automated, secure systems.', tags: ['Develop', 'Launch'] },
+    { id: '04', title: 'Testing', desc: 'We run thorough security checks and load tests to ensure complete stability.', tags: ['Security', 'Testing'] }
   ];
 
   return (
-    <div id="process" className="py-48 relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
-          <div className="lg:col-span-4 lg:sticky lg:top-48 h-fit">
-            <span className="text-primary font-mono text-[10px] tracking-[0.5em] uppercase block mb-8">Our Process</span>
-            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white mb-8">How we <br/> <span className="text-zinc-600 font-medium">work.</span></h2>
-            <p className="text-zinc-500 font-light leading-relaxed mb-12">
-              We follow a structured, step-by-step approach to build your software. Every phase is tested and verified to guarantee high quality and stability.
-            </p>
-            {/* <div className="p-6 border border-primary/20 bg-primary/5">
-              <span className="font-mono text-[9px] text-primary tracking-widest uppercase">system_note</span>
-              <p className="text-[11px] text-zinc-400 mt-2">Active phases are monitored via 24/7 telemetry feeds.</p>
-            </div> */}
-          </div>
+    <section id="process" className="py-32 bg-bg-dark relative overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute top-1/2 left-10 w-[500px] h-[500px] bg-primary/[0.01] rounded-full blur-[130px] pointer-events-none" />
 
-          <div className="lg:col-span-8 space-y-px bg-border-light border border-border-light">
-            {steps.map((step, idx) => (
-              <div key={idx} className="bg-bg-dark p-16 group hover:bg-zinc-900/50 transition-all duration-500 relative">
-                <div className="absolute top-0 right-0 p-8">
-                  <span className="text-[8rem] font-black text-white/5 group-hover:text-primary/10 transition-colors leading-none">{step.id}</span>
-                </div>
-                <div className="relative z-10">
-                  <h3 className="text-4xl font-mono font-bold text-white mb-6 group-hover:text-primary transition-colors">{step.title}</h3>
-                  <p className="text-xl text-zinc-500 font-light max-w-lg mb-12">
-                    {step.desc}
-                  </p>
-                  <div className="flex gap-4">
-                    {step.tags.map(tag => (
-                      <span key={tag} className="px-4 py-2 border border-zinc-800 text-[9px] font-mono tracking-widest text-zinc-600 uppercase">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+        
+        {/* Header Block */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
+          <div className="max-w-2xl">
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Our Process</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
+              How we <br /> 
+              <span className="text-zinc-600 font-light">work.</span>
+            </h2>
           </div>
+          <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
+            We follow a structured, step-by-step approach to guarantee that every system we build is high-performance, stable, and ready to scale.
+          </p>
         </div>
+
+        {/* 4-Column Timeline Flow */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+          {steps.map((step, idx) => (
+            <div 
+              key={idx} 
+              className="group block space-y-6 transition-all duration-300"
+            >
+              {/* Top Accent Line & Number */}
+              <div className="flex items-center gap-4">
+                <span className="text-primary font-mono text-xs font-light">{step.id}</span>
+                <div className="h-[1px] bg-primary/20 flex-grow group-hover:bg-primary transition-all duration-500 origin-left" />
+              </div>
+
+              {/* Step Title */}
+              <h3 className="text-2xl font-light text-white tracking-tight group-hover:text-primary transition-colors duration-300">
+                {step.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed group-hover:text-zinc-400 transition-colors duration-300">
+                {step.desc}
+              </p>
+
+              {/* Tags (bullet style) */}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-[9px] font-mono text-zinc-650">
+                {step.tags.map((tag, tIdx) => (
+                  <span key={tag} className="flex items-center gap-1.5">
+                    {tIdx > 0 && <span className="size-1 bg-zinc-800 rounded-full" />}
+                    <span>{tag}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

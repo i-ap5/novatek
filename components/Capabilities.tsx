@@ -7,67 +7,95 @@ const Capabilities: React.FC = () => {
       title: 'E-Commerce Solutions',
       label: 'Digital Retail',
       details: 'Turnkey online storefronts and payment integrations designed to drive sales and scale seamlessly.',
-      icon: 'shopping_bag'
+      icon: 'shopping_bag',
+      tags: ['Shopify', 'Stripe', 'Custom Checkout', 'Analytics']
     },
     {
       title: 'AI Integration',
       label: 'Automation',
       details: 'Smart systems that handle complex tasks automatically, saving your team hundreds of hours.',
-      icon: 'smart_toy'
+      icon: 'smart_toy',
+      tags: ['Gemini API', 'LLM Agents', 'Workflows', 'Automation']
     },
     {
       title: 'Seamless Scaling',
       label: 'Performance',
       details: 'Software that feels just as fast for 1 million users as it does for 10 users.',
-      icon: 'rocket_launch'
+      icon: 'rocket_launch',
+      tags: ['Edge Runtime', 'Caching', 'Database Optimizations']
     },
     {
       title: 'Reliable Security',
       label: 'Safety',
       details: 'Deep-level protection for your data and your users, built directly into the foundation.',
-      icon: 'gpp_maybe'
+      icon: 'gpp_maybe',
+      tags: ['AES-256', 'SSL/TLS', 'IAM Security', 'Compliance']
     }
   ];
 
   return (
     <section id="capabilities" className="py-32 bg-bg-dark relative overflow-hidden">
+      {/* Background ambient light */}
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[60px] pointer-events-none" />
+
       <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+        
+        {/* Header Block */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-2xl">
-            <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-6">Our Services</span>
-            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white">How we help you <br /> <span className="text-zinc-600 font-medium">thrive.</span></h2>
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Our Capabilities</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
+              How we help you <br /> 
+              <span className="text-zinc-600 font-light">thrive.</span>
+            </h2>
           </div>
-          <p className="text-zinc-500 text-lg font-light max-w-sm border-l border-zinc-800 pl-8">
-            Custom software development for businesses that want high-quality results and long-term growth.
+          <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
+            Custom software development for businesses that want high-quality results, seamless usability, and long-term growth.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* 2x2 Typography-First Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-20">
           {items.map((item, idx) => (
             <a
               key={idx}
               href="#services-detailed"
-              className="group glass-card p-6 md:p-10 rounded-3xl flex flex-col h-full hover:bg-zinc-900/40 transition-all cursor-pointer"
+              className="group block space-y-6 transition-all duration-300"
             >
-              <div className="size-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500">
-                <span className="material-symbols-outlined text-primary text-3xl font-light">{item.icon}</span>
+              {/* Top Accent Line & Number */}
+              <div className="flex items-center gap-4">
+                <span className="text-primary font-mono text-xs font-light">0{idx + 1}</span>
+                <div className="h-[1px] bg-primary/20 flex-grow group-hover:bg-primary transition-all duration-500 origin-left" />
               </div>
 
-              <div className="space-y-4 mb-10 flex-grow">
-                <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">{item.label}</span>
-                <h3 className="text-2xl font-bold text-white tracking-tight">{item.title}</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed font-light">
-                  {item.details}
-                </p>
+              {/* Title & Icon */}
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-zinc-600 text-xl font-light group-hover:text-primary transition-colors duration-300">
+                  {item.icon}
+                </span>
+                <h3 className="text-2xl md:text-3xl font-light text-white tracking-tight group-hover:text-primary transition-colors duration-300">
+                  {item.title}
+                </h3>
               </div>
 
-              <div className="pt-6 border-t border-white/5 flex items-center justify-between group-hover:border-primary/20 transition-colors">
-                <span className="text-[10px] font-bold text-zinc-700 uppercase tracking-widest group-hover:text-primary transition-colors">Learn more</span>
-                <span className="material-symbols-outlined text-zinc-800 group-hover:text-primary transition-all group-hover:translate-x-1">arrow_forward</span>
+              {/* Description */}
+              <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed group-hover:text-zinc-400 transition-colors duration-300">
+                {item.details}
+              </p>
+
+              {/* Tags (bullet style) */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 text-[10px] font-mono text-zinc-600">
+                {item.tags.map((tag, tIdx) => (
+                  <span key={tIdx} className="flex items-center gap-2">
+                    {tIdx > 0 && <span className="size-1 bg-zinc-800 rounded-full" />}
+                    <span>{tag}</span>
+                  </span>
+                ))}
               </div>
             </a>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -85,67 +85,136 @@ const sentimentClusters: Record<string, string> = {
   "Build Quality": "AI Consensus: Excellent durability feedback. Space black anodized finish resists smudges and keys remain highly tactile after months of intensive use."
 };
 
-// 1. PRODUCTS TEASER COMPONENT (LANDING PAGE ONLY)
 const ProductsTeaser: React.FC = () => {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   return (
     <section id="products" className="py-32 bg-bg-dark relative overflow-hidden">
-      {/* Decors */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[130px] pointer-events-none"></div>
+      {/* Background ambient light */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
+        
+        {/* Header Block */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-2xl">
-            <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-6">AI Suite</span>
-            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white">
-              Proprietary <br /> <span className="text-zinc-600 font-medium">products.</span>
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">AI Suite</span>
+            <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
+              Proprietary <br /> 
+              <span className="text-zinc-600 font-light">products.</span>
             </h2>
           </div>
-          <p className="text-zinc-500 text-lg font-light max-w-sm border-l border-zinc-800 pl-8">
+          <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
             Advanced language, audio, and reasoning pipelines packaged into production-ready software suites.
           </p>
         </div>
 
-        {/* 3-column teaser cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {products.map((p) => (
-            <div key={p.id} className="glass-card rounded-3xl p-8 flex flex-col justify-between min-h-[380px] relative overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 group">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
-              <div>
-                <span className="text-[9px] font-mono tracking-widest text-primary uppercase block mb-4">
-                  {p.id} // {p.tag.split(" - ")[0]}
-                </span>
-                <h3 className="text-xl font-medium text-white mb-4 group-hover:text-primary transition-colors">
-                  {p.title.split(" — ")[0]}
-                </h3>
-                <p className="text-zinc-400 font-light text-xs leading-relaxed mb-6">
-                  {p.solution}
-                </p>
-              </div>
+        {/* Vertical Editorial Directory List */}
+        <div className="border-t border-white/5">
+          {products.map((p, idx) => {
+            const isHovered = hoveredIdx === idx;
 
-              <div className="pt-6 border-t border-white/5 space-y-4">
-                {/* Highlight Stat */}
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-mono text-primary font-light">{p.stats[0].value}</span>
-                  <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-wider">{p.stats[0].label}</span>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {p.features.slice(0, 2).map((f) => (
-                    <span key={f} className="px-2 py-0.5 bg-zinc-900 border border-white/5 text-[8px] font-mono tracking-wider text-zinc-500 uppercase rounded">
-                      {f.split(":")[0]}
+            return (
+              <div
+                key={p.id}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className="group border-b border-white/5 py-10 transition-all duration-300 hover:bg-white/[0.01] px-4 -mx-4 rounded-lg"
+              >
+                <Link
+                  to="/products"
+                  className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center cursor-pointer"
+                >
+                  {/* Index Number */}
+                  <div className="col-span-1 md:col-span-1 flex items-center gap-2">
+                    <span className="text-zinc-650 font-mono text-sm group-hover:text-primary transition-colors duration-300">
+                      {p.id}
                     </span>
-                  ))}
+                    <span className={`size-1 bg-primary rounded-full transition-all duration-300 ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} />
+                  </div>
+
+                  {/* Title and Category Tag */}
+                  <div className="col-span-1 md:col-span-5 space-y-2">
+                    <div className="flex items-center gap-3">
+                      <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight group-hover:text-primary transition-colors duration-300">
+                        {p.title.split(" — ")[0]}
+                      </h3>
+
+                      {/* Micro Waveform Icon for Hospitality Voice */}
+                      {p.id === "03" && isHovered && (
+                        <div className="flex items-center gap-0.5 h-3">
+                          <span className="w-[1.5px] bg-primary h-full animate-[pulse_1s_infinite]"></span>
+                          <span className="w-[1.5px] bg-primary h-[60%] animate-[pulse_0.8s_infinite_100ms]"></span>
+                          <span className="w-[1.5px] bg-primary h-[80%] animate-[pulse_1.2s_infinite_200ms]"></span>
+                        </div>
+                      )}
+                      
+                      {/* Micro rating for Sentiment Analysis */}
+                      {p.id === "01" && isHovered && (
+                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">★ 4.8</span>
+                      )}
+
+                      {/* Micro document count for Echo Link */}
+                      {p.id === "02" && isHovered && (
+                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[10px]">description</span> RAG
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
+                      {p.tag.split(" - ")[0]}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <div className="col-span-1 md:col-span-4">
+                    <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed group-hover:text-zinc-400 transition-colors duration-300">
+                      {p.solution}
+                    </p>
+                  </div>
+
+                  {/* Key Impact Statistic */}
+                  <div className="col-span-1 md:col-span-2 flex flex-col items-start md:items-end">
+                    <span className="text-2xl font-light text-primary font-mono leading-none mb-1">
+                      {p.stats[0].value}
+                    </span>
+                    <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest text-left md:text-right">
+                      {p.stats[0].label.replace("detection", "detect")}
+                    </span>
+                  </div>
+                </Link>
+
+                {/* Smooth Expanding Specs & Features */}
+                <div 
+                  className={`grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 overflow-hidden transition-all duration-500 ease-in-out ${
+                    isHovered ? 'max-h-48 opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'
+                  }`}
+                >
+                  <div className="hidden md:block md:col-span-1" /> {/* Spacer */}
+                  <div className="col-span-1 md:col-span-11 flex flex-wrap gap-2 text-[9px] font-mono">
+                    {p.features.map((feat, fIdx) => (
+                      <span 
+                        key={fIdx} 
+                        className="border border-white/5 bg-zinc-900/40 text-zinc-400 px-3 py-1 rounded-full hover:border-primary/10 transition-colors"
+                      >
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        <div className="mt-16 flex justify-center">
+        {/* CTA */}
+        <div className="mt-20 flex justify-center">
           <Link 
             to="/products" 
-            className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-mono text-[10px] tracking-widest uppercase py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
+            className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-sans font-semibold text-xs tracking-wider py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
           >
-            Launch Interactive Product Simulators
+            Explore our products
             <span className="material-symbols-outlined text-xs group-hover:translate-x-1.5 transition-transform">east</span>
           </Link>
         </div>
@@ -624,11 +693,11 @@ const ProductsWorkspace: React.FC = () => {
                   <div className="space-y-5">
                     <div>
                       <h5 className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mb-1.5">business problem</h5>
-                      <p className="text-zinc-400 font-light text-[13px] md:text-sm leading-relaxed">{p.problem}</p>
+                      <p className="text-zinc-400 font-light text-sm md:text-base leading-relaxed">{p.problem}</p>
                     </div>
                     <div>
                       <h5 className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase mb-1.5">deployed solution</h5>
-                      <p className="text-zinc-400 font-light text-[13px] md:text-sm leading-relaxed">{p.solution}</p>
+                      <p className="text-zinc-400 font-light text-sm md:text-base leading-relaxed">{p.solution}</p>
                     </div>
                   </div>
 

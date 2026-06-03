@@ -4,12 +4,6 @@ import Aurora from './Aurora';
 
 
 const Hero: React.FC = () => {
-  const pillars = [
-    { title: 'Built to Scale', desc: 'Software and systems designed to grow easily as your traffic increases.', icon: 'trending_up' },
-    { title: 'Clean Architecture', desc: 'Written using clear, modern standards that are simple to update.', icon: 'auto_awesome' },
-    { title: 'Top-Tier Security', desc: 'Keeping your customer and business data fully protected at every layer.', icon: 'verified_user' }
-  ];
-
   return (
     <section className="min-h-screen flex flex-col items-center justify-center pt-32 pb-24 relative overflow-hidden bg-bg-dark">
       {/* BG */}
@@ -36,7 +30,7 @@ const Hero: React.FC = () => {
         </span>
       </h1>
 
-      <p className="opacity-0 animate-text-reveal delay-3 text-l md:text-2xl text-zinc-400 font-regular max-w-2xl leading-relaxed md:mx-auto">
+      <p className="opacity-0 animate-text-reveal delay-3 text-lg md:text-2xl text-zinc-400 font-regular max-w-2xl leading-relaxed md:mx-auto">
         We build fast, secure, and custom software designed to help your business run smoothly and scale effortlessly.
       </p>
 
@@ -60,32 +54,6 @@ const Hero: React.FC = () => {
         </a>
       </div>
     </div>
-
-
-        {/* Packed Pillars Section - Centered Grid */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl animate-fade-up" style={{ animationDelay: '0.3s' }}>
-          {pillars.map((pillar, i) => (
-            <div 
-              key={i} 
-              className="p-8 rounded-3xl glass-card group hover:-translate-y-2 relative overflow-hidden text-center flex flex-col items-center"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="size-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-bg-dark transition-all duration-500 relative z-10 shadow-inner group-hover:shadow-primary/50">
-                <span className="material-symbols-outlined text-2xl font-light">{pillar.icon}</span>
-              </div>
-              <div className="relative z-10">
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{pillar.title}</h3>
-                <p className="text-xs text-zinc-500 leading-relaxed font-light">{pillar.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-{/* 
-        <div className="mt-20 flex items-center gap-4 text-zinc-600 font-mono text-[9px] tracking-[0.4em] uppercase animate-fade-up" style={{ animationDelay: '0.4s' }}>
-          <span className="h-px w-10 bg-zinc-800"></span>
-          <span>Next Intake: February 2026</span>
-          <span className="h-px w-10 bg-zinc-800"></span>
-        </div> */}
       </div>
     </section>
   );

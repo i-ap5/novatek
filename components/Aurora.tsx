@@ -241,7 +241,9 @@ const Aurora = ({
 
   useEffect(() => {
     const el = containerRef.current!;
-    const renderer = new Renderer({ alpha: true, dpr: Math.min(2, window.devicePixelRatio) });
+    // Cap DPR at 1.5 to reduce pixel fill rate on mobile
+    const dpr = Math.min(1.5, window.devicePixelRatio);
+    const renderer = new Renderer({ alpha: true, dpr });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
 
@@ -376,12 +378,24 @@ const Aurora = ({
     );
     observer.observe(el);
 
+    // On low-DPR (mobile) devices, skip every other frame to halve GPU load
+    const isLowEnd = dpr <= 1;
+    let frameCount = 0;
+
     let raf = 0;
     const update = (t: number) => {
       if (!isVisible) {
         raf = requestAnimationFrame(update);
         return;
       }
+
+      // Frame skipping on low-end devices
+      frameCount++;
+      if (isLowEnd && frameCount % 2 !== 0) {
+        raf = requestAnimationFrame(update);
+        return;
+      }
+
       mouse.current.x += (target.current.x - mouse.current.x) * 0.3;
       mouse.current.y += (target.current.y - mouse.current.y) * 0.3;
 

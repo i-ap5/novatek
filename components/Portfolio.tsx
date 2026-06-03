@@ -89,99 +89,83 @@ const Portfolio: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
 
   return (
     <div className={teaser ? "" : "pt-12"}>
-      <section id="portfolio" className="py-32 bg-bg-dark relative overflow-hidden">
+      <section id="portfolio" className="pt-32 pb-48 bg-bg-dark relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-[1400px] mx-auto px-6 md:px-20 relative z-10">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
             <div className="max-w-2xl">
-              <span className="text-primary font-bold text-xs tracking-[0.4em] uppercase block mb-6">Our Work</span>
-              <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white">
-                Featured <br /> <span className="text-zinc-600 font-medium">projects.</span>
+              <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Our Work</span>
+              <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
+                Featured <br /> <span className="text-zinc-600 font-light">projects.</span>
               </h2>
             </div>
-            <p className="text-zinc-500 text-lg font-light max-w-sm border-l border-zinc-800 pl-8">
+            <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
               Real-world solutions we've delivered for businesses across industries, driving growth and operational excellence.
             </p>
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
             {projects.map((project) => (
               <div
                 key={project.title}
                 onClick={() => handleProjectClick(project)}
-                className="group relative cursor-pointer glass-card rounded-3xl overflow-hidden flex flex-col justify-between min-h-[480px]"
+                className="group flex flex-col justify-between h-full cursor-pointer px-0 md:px-8 py-10 md:py-0 border-b md:border-b-0 md:border-r border-white/10 last:border-r-0 last:border-b-0"
               >
-                {/* Visual Accent Glow */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`}></div>
-                
-                {/* Blended Browser Mockup: edge-to-edge at the top of the card */}
-                <div className="w-full relative aspect-video bg-zinc-950 border-b border-white/10 flex flex-col overflow-hidden">
-                  {/* Simulated URL bar and dots */}
-                  <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-900/90 border-b border-white/5 z-10">
-                    <div className="flex items-center gap-1.5">
-                      <span className="size-1.5 rounded-full bg-[#ff5f56]/80"></span>
-                      <span className="size-1.5 rounded-full bg-[#ffbd2e]/80"></span>
-                      <span className="size-1.5 rounded-full bg-[#27c93f]/80"></span>
-                    </div>
-                    <div className="text-[8px] font-mono text-zinc-500 bg-black/40 px-3 py-0.5 rounded border border-white/5 select-none truncate max-w-[180px] text-center">
-                      {project.url.replace('https://', '').replace('www.', '')}
-                    </div>
-                    <span className="material-symbols-outlined text-[10px] text-zinc-600">lock</span>
-                  </div>
-                  
-                  {/* Viewport screenshot */}
-                  <div className="flex-1 w-full overflow-hidden relative bg-zinc-950">
+                <div className="space-y-6">
+                  {/* Clean Borderless Image Banner */}
+                  <div className="relative aspect-[16/10] w-full rounded-none overflow-hidden bg-zinc-900">
                     <img 
                       src={project.image} 
                       alt={project.title} 
                       className="w-full h-full object-cover group-hover:scale-[1.03] transition-all duration-700 ease-out" 
                     />
-                    
-                    {/* Gradient Vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-                    
-                    {/* Dynamic light reflection sweep on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 pointer-events-none" />
+                    {/* Sweep highlight */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none"></div>
                   </div>
-                </div>
 
-                {/* Text Content Area: padded */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between relative z-10">
-                  <div>
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs text-primary/60">{project.id} //</span>
-                        <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase">{project.category}</span>
-                      </div>
-                      <span className="material-symbols-outlined text-primary/30 group-hover:text-primary group-hover:scale-110 transition-all text-2xl font-light">
-                        {project.icon}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl md:text-2xl font-medium text-white mb-3 group-hover:text-primary transition-colors leading-tight">
-                      {project.title}
-                    </h3>
-                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed font-light mb-6">
-                      {project.description}
-                    </p>
+                  {/* Accent Line & Index Number */}
+                  <div className="flex items-center gap-4">
+                    <span className="text-primary font-mono text-xs font-light">{project.id}</span>
+                    <div className="h-[1px] bg-primary/20 flex-grow group-hover:bg-primary transition-all duration-500 origin-left" />
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/5">
-                    <div className="flex gap-1.5">
-                      {project.tech.slice(0, 3).map(t => (
-                        <span key={t} className="px-2 py-0.5 border border-white/5 bg-zinc-900/50 text-[8px] font-mono tracking-wider text-zinc-500 uppercase rounded">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-primary transition-colors">
-                      View Case Study
-                      <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+                  {/* Header/Category & Icon */}
+                  <div className="flex justify-between items-center text-[9px] font-mono tracking-widest text-zinc-500 uppercase">
+                    <span>{project.category}</span>
+                    <span className="material-symbols-outlined text-primary/40 group-hover:text-primary group-hover:scale-110 transition-all text-lg font-light">
+                      {project.icon}
                     </span>
                   </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl font-light text-white tracking-tight group-hover:text-primary transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed group-hover:text-zinc-400 transition-colors duration-300">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Tech Tags & CTA Link */}
+                <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/5 mt-8">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono text-zinc-600">
+                    {project.tech.slice(0, 3).map((tag, tIdx) => (
+                      <span key={tag} className="flex items-center gap-1.5">
+                        {tIdx > 0 && <span className="size-1 bg-zinc-800 rounded-full" />}
+                        <span>{tag}</span>
+                      </span>
+                    ))}
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-zinc-500 group-hover:text-primary transition-colors shrink-0">
+                    <span>Explore Case</span>
+                    <span className="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">east</span>
+                  </span>
                 </div>
               </div>
             ))}
@@ -192,9 +176,9 @@ const Portfolio: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
             <div className="mt-16 flex justify-center">
               <Link 
                 to="/portfolio" 
-                className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-mono text-[10px] tracking-widest uppercase py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
+                className="group border border-primary/20 hover:border-primary bg-primary/5 hover:bg-primary text-white hover:text-bg-dark font-sans font-semibold text-xs tracking-wider py-4 px-8 rounded-full transition-all duration-300 flex items-center gap-3 shadow-lg shadow-primary/5"
               >
-                Explore All Case Studies
+                Explore all works
                 <span className="material-symbols-outlined text-xs group-hover:translate-x-1.5 transition-transform">east</span>
               </Link>
             </div>
@@ -239,7 +223,7 @@ const Portfolio: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
                   {/* Left Column: Image & Info (col-span-5) */}
                   <div className="md:col-span-5 space-y-6">
                     {/* Browser Mockup Frame */}
-                    <div className="w-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl flex flex-col">
+                    <div className="w-full rounded-lg overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl flex flex-col">
                       <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-900 border-b border-white/5">
                         <span className="size-2 rounded-full bg-red-500/80"></span>
                         <span className="size-2 rounded-full bg-yellow-500/80"></span>
@@ -283,15 +267,15 @@ const Portfolio: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
                     <div className="space-y-4">
                       <div>
                         <h4 className="text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-1">Challenge</h4>
-                        <p className="text-zinc-300 font-light leading-relaxed text-xs md:text-sm">{activeProject.problem}</p>
+                        <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">{activeProject.problem}</p>
                       </div>
                       <div>
                         <h4 className="text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-1">Our Approach</h4>
-                        <p className="text-zinc-300 font-light leading-relaxed text-xs md:text-sm">{activeProject.solution}</p>
+                        <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">{activeProject.solution}</p>
                       </div>
                       <div>
                         <h4 className="text-zinc-500 font-mono text-[10px] tracking-widest uppercase mb-1">System Infrastructure</h4>
-                        <p className="text-zinc-300 font-light leading-relaxed text-xs md:text-sm">{activeProject.plainEnglishInfrastructure}</p>
+                        <p className="text-zinc-300 font-light leading-relaxed text-sm md:text-base">{activeProject.plainEnglishInfrastructure}</p>
                       </div>
                     </div>
 
