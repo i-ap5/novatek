@@ -12,6 +12,7 @@ interface Product {
   id: string;
   tag: string;
   title: string;
+  shortDescription: string;
   problem: string;
   solution: string;
   impact: string;
@@ -22,8 +23,28 @@ interface Product {
 const products: Product[] = [
   {
     id: "01",
-    tag: "LANGUAGE & AUDIO - 03",
+    tag: "HEALTHCARE SYSTEMS - 01",
+    title: "SmartClinic — Intelligent Practice Management Suite",
+    shortDescription: "A clinic booking system that makes scheduling easy for patients, includes a high-contrast mode for elderly visitors, and helps manage urgent walk-ins.",
+    problem: "Healthcare clinics struggle with high patient no-shows, complex booking interfaces that confuse older patients, inefficient prescription generation, and manual management of critical emergency availability slots.",
+    solution: "A unified practice suite featuring a 30-minute interval booking grid, automated patient reminders, a visual 'Elder Mode' with simplified navigation, and a clinical AI prescription module with doctor-in-the-loop validation.",
+    impact: "Reduces patient no-shows by 90% via proactive notification logs. Accelerates prescription time using AI recommendations with complete clinical oversight. Improves booking completion rates for visual/cognitively challenged patients.",
+    stats: [
+      { value: "-90%", suffix: "No-Shows", label: "Automated alerts" },
+      { value: "30m", suffix: "Interval", label: "Intelligent grid" },
+      { value: "22pt", suffix: "Font Size", label: "Elder accessibility mode" }
+    ],
+    features: [
+      "Intelligent Grid: 30-min slots with hidden emergency reserves",
+      "Elder Mode: High contrast, 22pt typography, simple wizard",
+      "AI Prescriptions: Diagnosis-to-medication suggesting with clinical logs"
+    ]
+  },
+  {
+    id: "02",
+    tag: "LANGUAGE & AUDIO - 04",
     title: "Sentiment Analysis — Ecommerce Review Intelligence",
+    shortDescription: "A smart dashboard that reads thousands of online store reviews and instantly groups them so you can see what customers love or complain about.",
     problem: "An ecommerce platform struggled to understand what customers were most talking about across thousands of product reviews. Manual reading was unscalable, leaving negative sentiment and recurring complaint topics undetected until they affected ratings.",
     solution: "Built a sentiment analysis pipeline to categorise reviews by topic, surface the most discussed subjects and classify sentiment per category. Integrated with the product review feed to deliver real-time topic trend dashboards for merchandising and support teams.",
     impact: "Negative sentiment detection response improved by 50%, enabling faster interventions. Actionable topic insights drove a 15% increase in campaign success rates and helped product teams prioritise improvements based on what customers talked about most.",
@@ -39,9 +60,10 @@ const products: Product[] = [
     ]
   },
   {
-    id: "02",
-    tag: "LANGUAGE & AUDIO - 02",
+    id: "03",
+    tag: "LANGUAGE & AUDIO - 03",
     title: "Echo Link — Offline RAG Document Extraction",
+    shortDescription: "A secure search assistant that lets your team chat with documents and get answers from contracts or reports without uploading files to the internet.",
     problem: "Organizations handling large volumes of unstructured documents such as contracts, invoices and legal agreements struggled with manual extraction that was slow, error-prone and inconsistent across varying document formats.",
     solution: "Fine-tuned LLM deployed offline for document extraction across tables, key-value pairs and long-form text. Integrated with existing document management systems via LLM APIs and added human-in-the-loop validation pipelines for edge cases.",
     impact: "Document processing time reduced by 70%, enabling faster operational cycles. Labor costs cut by up to 40% through automation. Data extraction accuracy improved from 85% to 98%, significantly reducing compliance risks.",
@@ -57,9 +79,10 @@ const products: Product[] = [
     ]
   },
   {
-    id: "03",
-    tag: "VOICE AGENTS - 01",
+    id: "04",
+    tag: "VOICE AGENTS - 02",
     title: "Hospitality Voice — AI Support & Sales Agent",
+    shortDescription: "An automated phone assistant that answers customer calls, books guest stays, and helps sales teams manage reservation requests.",
     problem: "Hospitality chains handling multi-property guest calls struggled with high volumes, inconsistent service and agents tied up on repetitive booking and availability queries. Sales teams had no scalable way to run proactive outreach across large lead pipelines.",
     solution: "Built a voice AI agent handling inbound support calls with NLU intent resolution, TTS response generation and CRM-API integration. Paired with an AI sales assistant for proactive lead outreach, qualification and conversion tracking across the hospitality chain.",
     impact: "1,847 calls handled daily at 91.4% automation rate. AI sales assistant engaged 1,284 leads at 18.4% conversion rate with $48k projected revenue. Human agents freed to handle escalations only, improving service quality and sales efficiency at scale.",
@@ -140,25 +163,32 @@ const ProductsTeaser: React.FC = () => {
                         {p.title.split(" — ")[0]}
                       </h3>
 
-                      {/* Micro Waveform Icon for Hospitality Voice */}
+                      {/* Micro badge for SmartClinic */}
+                      {p.id === "01" && isHovered && (
+                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[10px]">medical_services</span> Elder Mode
+                        </span>
+                      )}
+
+                      {/* Micro rating for Sentiment Analysis */}
+                      {p.id === "02" && isHovered && (
+                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">★ 4.8</span>
+                      )}
+
+                      {/* Micro document count for Echo Link */}
                       {p.id === "03" && isHovered && (
+                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[10px]">description</span> RAG
+                        </span>
+                      )}
+
+                      {/* Micro Waveform Icon for Hospitality Voice */}
+                      {p.id === "04" && isHovered && (
                         <div className="flex items-center gap-0.5 h-3">
                           <span className="w-[1.5px] bg-primary h-full animate-[pulse_1s_infinite]"></span>
                           <span className="w-[1.5px] bg-primary h-[60%] animate-[pulse_0.8s_infinite_100ms]"></span>
                           <span className="w-[1.5px] bg-primary h-[80%] animate-[pulse_1.2s_infinite_200ms]"></span>
                         </div>
-                      )}
-
-                      {/* Micro rating for Sentiment Analysis */}
-                      {p.id === "01" && isHovered && (
-                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">★ 4.8</span>
-                      )}
-
-                      {/* Micro document count for Echo Link */}
-                      {p.id === "02" && isHovered && (
-                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[10px]">description</span> RAG
-                        </span>
                       )}
                     </div>
                     <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
@@ -169,7 +199,7 @@ const ProductsTeaser: React.FC = () => {
                   {/* Description */}
                   <div className="col-span-1 md:col-span-4">
                     <p className="text-zinc-500 font-light text-sm md:text-base leading-relaxed group-hover:text-zinc-400 transition-colors duration-300">
-                      {p.solution}
+                      {p.shortDescription}
                     </p>
                   </div>
 
@@ -251,6 +281,10 @@ const ProductsWorkspace: React.FC = () => {
     "Pipeline: Ready to resolve guest calls."
   ]);
 
+  // SmartClinic states
+  const [urgentSymptom, setUrgentSymptom] = useState(false);
+  const [elderModeActive, setElderModeActive] = useState(false);
+
   // Simulate Hospitality calls in background
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -326,6 +360,106 @@ const ProductsWorkspace: React.FC = () => {
 
   const renderInteractiveMockup = (idx: number) => {
     if (idx === 0) {
+      // SmartClinic Practice Management Simulator (Minimal, Simple)
+      return (
+        <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
+          {/* Header */}
+          <div className="flex justify-between items-center pb-2.5 border-b border-white/5 mb-3">
+            <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase">SmartClinic Intake Console</span>
+            <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1.5 shrink-0">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              SYSTEM ACTIVE
+            </span>
+          </div>
+
+          {/* Central Workspace Card */}
+          <div className={`p-3 rounded-2xl border transition-all duration-300 flex-1 flex flex-col justify-between mb-3 min-h-0 ${
+            elderModeActive ? 'bg-white text-black border-black font-bold text-sm' : 'bg-white/[0.01] border-white/5 text-zinc-400'
+          }`}>
+            {elderModeActive ? (
+              <div className="space-y-4 font-sans font-bold text-center py-4">
+                <span className="text-[10px] font-mono tracking-widest text-zinc-500 block uppercase font-mono">Elder Accessibility Mode</span>
+                <h4 className="text-xl font-black text-black leading-tight">CHOOSE DATE</h4>
+                <div className="flex gap-2 justify-center pt-2">
+                  <button className="border-2 border-black bg-black text-white px-4 py-2.5 text-xs font-black uppercase tracking-wider hover:bg-zinc-800 transition-colors">
+                    Today
+                  </button>
+                  <button className="border-2 border-black bg-white text-black px-4 py-2.5 text-xs font-black uppercase tracking-wider hover:bg-zinc-100 transition-colors">
+                    Tomorrow
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-3 min-h-0">
+                <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500 uppercase tracking-widest">
+                  <span>30-Minute Schedule Log</span>
+                  <span>Patient Intake</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center bg-zinc-950 p-2.5 border border-white/5 rounded-xl text-[10px] font-mono">
+                    <span className="text-zinc-400">09:30 AM — Standard Check-in</span>
+                    <span className="text-zinc-550">Scheduled</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-zinc-950 p-2.5 border border-white/5 rounded-xl text-[10px] font-mono">
+                    <span className="text-zinc-400">10:30 AM — Patient Consult</span>
+                    <span className="text-zinc-550">Active</span>
+                  </div>
+                  <div className={`flex justify-between items-center p-2.5 border rounded-xl text-[10px] font-mono transition-all duration-300 ${
+                    urgentSymptom 
+                      ? 'bg-red-500/10 border-red-500/30 text-red-400' 
+                      : 'bg-zinc-950/20 border-dashed border-zinc-800 text-zinc-650'
+                  }`}>
+                    <span>11:00 AM — Emergency Slot</span>
+                    <span className={urgentSymptom ? "text-red-400 animate-pulse font-bold" : "text-zinc-600"}>
+                      {urgentSymptom ? "Unlocked & Available" : "Emergency Reserve Locked"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Micro Stats Footer inside the card */}
+            {!elderModeActive && (
+              <div className="pt-2 border-t border-white/5 flex justify-between items-center text-[8px] font-mono text-zinc-600 w-full min-w-0">
+                <span>AI PRESCRIPTION: SIGNED & AUDITED</span>
+                <span className="text-primary font-bold">90% NO-SHOW REDUCTION</span>
+              </div>
+            )}
+          </div>
+
+          {/* Simple Control Buttons */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => setUrgentSymptom(!urgentSymptom)}
+              className={`flex-1 py-2.5 rounded-xl text-[9px] font-mono font-bold tracking-wider uppercase transition-all duration-300 border ${
+                urgentSymptom
+                  ? 'bg-red-500/10 border-red-500/30 text-red-400'
+                  : 'bg-white/5 border-white/10 hover:border-red-500/20 text-zinc-500 hover:text-red-400'
+              }`}
+            >
+              {urgentSymptom ? "Clear Urgent Mode" : "Urgent Symptom Trigger"}
+            </button>
+
+            <button
+              onClick={() => setElderModeActive(!elderModeActive)}
+              className={`flex-1 py-2.5 rounded-xl text-[9px] font-mono font-bold tracking-wider uppercase transition-all duration-300 border ${
+                elderModeActive
+                  ? 'bg-black border-2 border-black text-white hover:bg-zinc-800'
+                  : 'bg-white/5 border-white/10 hover:border-primary/40 text-primary'
+              }`}
+            >
+              Elder Theme: {elderModeActive ? "ON" : "OFF"}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (idx === 1) {
+      // Sentiment Analysis mockup
       return (
         <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
           {/* Header */}
@@ -379,108 +513,66 @@ const ProductsWorkspace: React.FC = () => {
                     onClick={() => setSelectedCluster(tag.label)}
                     className={`flex justify-between items-center text-[9px] w-full text-left border px-2 py-1.5 rounded-lg transition-all ${selectedCluster === tag.label
                         ? 'bg-primary/10 border-primary/30 text-white font-semibold'
-                        : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
+                        : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-550'
                       }`}
                   >
-                    <span className="truncate">✓ {tag.label}</span>
-                    <span className="font-mono font-bold text-[9px] text-primary">{tag.count}</span>
+                    <span className="truncate">{tag.label}</span>
+                    <span className="font-mono text-primary bg-primary/5 px-1.5 py-0.5 rounded text-[8px]">{tag.count}</span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Bottom Thumbnails */}
-          <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-3 items-center justify-between">
-            <div className="flex gap-2">
-              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG1</div>
-              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG2</div>
-              <div className="size-8 rounded bg-zinc-850 border border-white/5 flex items-center justify-center text-[10px] text-zinc-600">IMG3</div>
-            </div>
-            <span className="text-[9px] font-mono text-zinc-500 truncate">Telemetry Feed v1.0.3</span>
+          {/* Footer details */}
+          <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-2 justify-between items-center text-[9px] font-mono text-zinc-600 w-full min-w-0">
+            <span className="truncate flex-1 text-left">Active Cluster: {selectedCluster}</span>
+            <span className="text-primary font-bold shrink-0">96.4% Accuracy Rating</span>
           </div>
         </div>
       );
     }
 
-    if (idx === 1) {
+    if (idx === 2) {
+      // Echo Link mockup (Offline RAG)
       return (
         <div className="flex-1 flex flex-col text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
           {/* Main Layout Grid */}
           <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden h-full w-full min-w-0">
-            {/* Left Panel: Documents Referenced */}
-            <div className="col-span-12 sm:col-span-4 sm:border-r border-white/5 sm:pr-4 flex flex-col justify-between min-h-0 mb-4 sm:mb-0 w-full min-w-0 overflow-hidden">
-              <div>
-                <span className="text-[8px] font-mono tracking-wider text-zinc-600 uppercase block mb-2 sm:mb-3">documents referenced</span>
-
-                {/* Mobile horizontal selector */}
-                <div className="sm:hidden flex gap-2 overflow-x-auto pb-2 scrollbar-none whitespace-nowrap w-full max-w-full min-w-0">
-                  {[
-                    "Saudi_Oil_Annual_Report_2024.pdf",
-                    "ME_Upstream_Production_Q4_2024.pdf",
-                    "Saudi_Refinery_Operations_2024.pdf",
-                    "GCC_Energy_Sustainability_Report.pdf",
-                    "Vision2030_Energy_Strategy_KSA.pdf"
-                  ].map((doc, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleDocClick(doc)}
-                      className={`inline-block border px-3 py-1.5 rounded-full text-[9px] font-mono transition-all ${activeDoc === doc
-                          ? 'bg-primary/10 border-primary/30 text-white'
-                          : 'bg-white/[0.01] border-white/5 text-zinc-400'
-                        }`}
-                    >
-                      {doc.split("_")[0]}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Desktop vertical list */}
-                <div className="hidden sm:block space-y-1 h-[210px] overflow-y-auto scrollbar-thin pr-1">
-                  {[
-                    "Saudi_Oil_Annual_Report_2024.pdf",
-                    "ME_Upstream_Production_Q4_2024.pdf",
-                    "Saudi_Refinery_Operations_2024.pdf",
-                    "GCC_Energy_Sustainability_Report.pdf",
-                    "Vision2030_Energy_Strategy_KSA.pdf"
-                  ].map((doc, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleDocClick(doc)}
-                      className={`flex items-center gap-2 border p-2 rounded-lg transition-all w-full text-left ${activeDoc === doc
-                          ? 'bg-primary/5 border-primary/20 text-white'
-                          : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-400'
-                        }`}
-                    >
-                      <span className={`material-symbols-outlined text-[14px] ${activeDoc === doc ? 'text-primary animate-pulse' : 'text-red-400/80'}`}>description</span>
-                      <span className="text-[9px] truncate leading-none font-mono flex-1 min-w-0">{doc}</span>
-                    </button>
-                  ))}
-                </div>
+            {/* Left Panel: Document Picker */}
+            <div className="col-span-12 sm:col-span-4 sm:border-r border-white/5 flex flex-col pr-0 sm:pr-2 min-h-0 min-w-0 w-full mb-3 sm:mb-0">
+              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-2">air-gapped document index</span>
+              <div className="flex-1 overflow-y-auto space-y-1 h-[75px] sm:h-auto scrollbar-thin">
+                {[
+                  "Saudi_Oil_Annual_Report_2024.pdf",
+                  "ME_Upstream_Production_Q4_2024.pdf",
+                  "Saudi_Refinery_Operations_2024.pdf",
+                  "GCC_Energy_Sustainability_Report.pdf",
+                  "Vision2030_Energy_Strategy_KSA.pdf"
+                ].map((docName) => (
+                  <button
+                    key={docName}
+                    onClick={() => handleDocClick(docName)}
+                    className={`w-full text-left p-1.5 rounded transition-all text-[8px] font-mono truncate border flex items-center gap-1.5 ${activeDoc === docName
+                        ? 'bg-primary/10 border-primary/20 text-white'
+                        : 'bg-white/[0.01] hover:bg-white/[0.03] border-white/5 text-zinc-500'
+                      }`}
+                  >
+                    <span className="material-symbols-outlined text-[9px] shrink-0">description</span>
+                    <span className="truncate">{docName}</span>
+                  </button>
+                ))}
               </div>
-              <button className="hidden sm:flex w-full mt-2 py-2 border border-dashed border-white/10 hover:border-primary/40 rounded-xl text-[9px] font-mono text-zinc-500 hover:text-primary transition-all items-center justify-center gap-1.5">
-                <span className="material-symbols-outlined text-xs">add</span> Add Document
-              </button>
             </div>
 
-            {/* Right Panel: Chat Assistant Area */}
+            {/* Right Panel: Simulated Chat Workspace */}
             <div className="col-span-12 sm:col-span-8 flex flex-col justify-between h-full pl-0 sm:pl-2 min-h-0 min-w-0 w-full">
-              {/* Chat Top Bar */}
-              <div className="flex justify-between items-center gap-2 pb-2 border-b border-white/5">
-                <div className="flex items-center gap-2 min-w-0 flex-1">
-                  <span className="material-symbols-outlined text-sm text-primary shrink-0">deployed_code</span>
-                  <span className="text-[9px] font-mono text-white font-bold truncate">Echo Link // RAG Assistant</span>
-                </div>
-                <span className="text-[8px] font-mono text-zinc-500 bg-white/5 px-2 py-0.5 rounded-full shrink-0">Personal</span>
-              </div>
-
-              {/* Messages Scroll Area */}
-              <div className="flex-1 overflow-y-auto py-3 space-y-4 pr-1 scrollbar-thin max-h-[140px]">
-                {chatHistory.map((chat, idx) => (
-                  <div key={idx} className={`flex flex-col ${chat.role === 'user' ? 'items-end' : 'items-start space-y-1.5'}`}>
+              <div className="flex-1 overflow-y-auto space-y-2 mb-2 pr-1 scrollbar-thin h-[100px] sm:h-[135px]">
+                {chatHistory.map((chat, index) => (
+                  <div key={index} className={`flex flex-col space-y-1 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
                     {chat.role === 'assistant' && chat.ref && (
-                      <div className="flex items-center gap-1 bg-zinc-900 border border-white/5 px-2 py-0.5 rounded text-[8px] font-mono text-zinc-500 max-w-full overflow-hidden">
-                        <span className="material-symbols-outlined text-[10px] text-zinc-600 shrink-0">bookmark</span>
+                      <div className="text-[7px] font-mono text-primary flex items-center gap-1 px-1 max-w-full">
+                        <span className="material-symbols-outlined text-[10px] text-zinc-650 shrink-0">bookmark</span>
                         <span className="truncate">{chat.ref}</span>
                       </div>
                     )}
@@ -495,8 +587,8 @@ const ProductsWorkspace: React.FC = () => {
 
                 {/* Typing Indicator */}
                 {isTyping && (
-                  <div className="flex flex-col items-start space-y-1">
-                    <span className="text-[8px] font-mono text-zinc-600">Assistant querying index...</span>
+                  <div className="flex-col items-start space-y-1">
+                    <span className="text-[8px] font-mono text-zinc-605">Assistant querying index...</span>
                     <div className="bg-white/[0.02] border border-white/5 p-3 rounded-2xl rounded-tl-none flex gap-1 items-center">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '0ms' }}></span>
                       <span className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style={{ animationDelay: '150ms' }}></span>
@@ -508,7 +600,7 @@ const ProductsWorkspace: React.FC = () => {
 
               {/* Suggested Followups */}
               <div className="pt-2 border-t border-white/5 space-y-1.5">
-                <span className="text-[8px] font-mono tracking-wider text-zinc-600 uppercase block">suggested questions</span>
+                <span className="text-[8px] font-mono tracking-wider text-zinc-650 uppercase block">suggested questions</span>
                 <div className="space-y-1 h-[45px] overflow-y-auto scrollbar-none">
                   {[
                     {
@@ -551,88 +643,93 @@ const ProductsWorkspace: React.FC = () => {
       );
     }
 
-    return (
-      <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
-        {/* Top KPIs */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 w-full min-w-0">
-          {[
-            { label: "Active Calls", value: activeCalls, sub: "Live queue" },
-            { label: "Calls Today", value: callsToday, sub: "+12% vs yest" },
-            { label: "Avg Duration", value: "2:34", sub: "Secs" },
-            { label: "Automation", value: "91.4%", sub: "Resolution" }
-          ].map((kpi, idx) => (
-            <div key={idx} className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center min-w-0">
-              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-0.5 truncate">{kpi.label}</span>
-              <span className="text-xs font-semibold text-white font-mono transition-all duration-300 truncate">{kpi.value}</span>
-              <span className="text-[8px] text-zinc-600 block mt-0.5 truncate">{kpi.sub}</span>
-            </div>
-          ))}
-        </div>
+    if (idx === 3) {
+      // Hospitality Voice mockup
+      return (
+        <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full max-w-full overflow-hidden">
+          {/* Top KPIs */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4 w-full min-w-0">
+            {[
+              { label: "Active Calls", value: activeCalls, sub: "Live queue" },
+              { label: "Calls Today", value: callsToday, sub: "+12% vs yest" },
+              { label: "Avg Duration", value: "2:34", sub: "Secs" },
+              { label: "Automation", value: "91.4%", sub: "Resolution" }
+            ].map((kpi, idx) => (
+              <div key={idx} className="bg-white/[0.02] border border-white/5 p-2 rounded-xl text-center min-w-0">
+                <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block mb-0.5 truncate">{kpi.label}</span>
+                <span className="text-xs font-semibold text-white font-mono transition-all duration-300 truncate">{kpi.value}</span>
+                <span className="text-[8px] text-zinc-650 block mt-0.5 truncate">{kpi.sub}</span>
+              </div>
+            ))}
+          </div>
 
-        {/* Main body: Flow graph & Agent */}
-        <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden min-w-0 w-full">
-          {/* Flow Visualization & Interactive Logger */}
-          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full mb-4 sm:mb-0 min-w-0 w-full">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">simulation logs</span>
-              <button
-                onClick={() => setSimulationActive(!simulationActive)}
-                className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all ${simulationActive
-                    ? 'bg-red-500/10 border-red-500/30 text-red-400'
-                    : 'bg-primary/10 border-primary/30 text-primary'
-                  }`}
-              >
-                {simulationActive ? "STOP" : "START"}
-              </button>
+          {/* Main body: Flow graph & Agent */}
+          <div className="flex-1 flex flex-col sm:grid sm:grid-cols-12 gap-3 sm:gap-4 overflow-hidden min-w-0 w-full">
+            {/* Flow Visualization & Interactive Logger */}
+            <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full mb-4 sm:mb-0 min-w-0 w-full">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-[8px] font-mono text-zinc-500 uppercase tracking-widest block">simulation logs</span>
+                <button
+                  onClick={() => setSimulationActive(!simulationActive)}
+                  className={`px-2 py-0.5 rounded text-[8px] font-mono border transition-all ${simulationActive
+                      ? 'bg-red-500/10 border-red-500/30 text-red-400'
+                      : 'bg-primary/10 border-primary/30 text-primary'
+                    }`}
+                >
+                  {simulationActive ? "STOP" : "START"}
+                </button>
+              </div>
+
+              {/* Live Console Output */}
+              <div className="flex-1 bg-zinc-950 p-2 rounded-lg border border-white/5 font-mono text-[8px] text-zinc-400 overflow-y-auto space-y-1 h-[100px] scrollbar-thin">
+                {simulationLogs.map((log, idx) => (
+                  <div key={idx} className="truncate">
+                    <span className="text-zinc-650">&gt;</span> {log}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Live Console Output */}
-            <div className="flex-1 bg-zinc-950 p-2 rounded-lg border border-white/5 font-mono text-[8px] text-zinc-400 overflow-y-auto space-y-1 h-[100px] scrollbar-thin">
-              {simulationLogs.map((log, idx) => (
-                <div key={idx} className="truncate">
-                  <span className="text-zinc-600">&gt;</span> {log}
+            {/* AI Sales Agent details */}
+            <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full min-w-0 w-full">
+              <div className="space-y-3 min-w-0">
+                <div className="flex items-center gap-2 pb-1 border-b border-white/5 min-w-0">
+                  <div className="size-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-primary shrink-0">MT</div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[9px] text-white block leading-tight font-medium truncate">Marcus Thorne</span>
+                    <span className="text-[8px] text-zinc-500 block leading-tight truncate">Director of Ops</span>
+                  </div>
                 </div>
-              ))}
+
+                {/* Lead Snippet */}
+                <div className="bg-zinc-950 p-2 rounded-lg border border-white/5 text-[9px] text-zinc-400 font-light leading-relaxed h-[45px] overflow-y-auto scrollbar-thin">
+                  "Hello Marcus! I noticed TechFlow scaled engineering by 40%..."
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 mt-3 text-[9px] font-mono">
+                <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
+                  <span className="text-zinc-650 block">LEADS</span>
+                  <span className="text-white font-bold">1,284</span>
+                </div>
+                <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
+                  <span className="text-zinc-650 block">CONV.</span>
+                  <span className="text-white font-bold">18.4%</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* AI Sales Agent details */}
-          <div className="col-span-12 sm:col-span-6 bg-zinc-900/30 border border-white/5 p-3 rounded-2xl flex flex-col justify-between h-full min-w-0 w-full">
-            <div className="space-y-3 min-w-0">
-              <div className="flex items-center gap-2 pb-1 border-b border-white/5 min-w-0">
-                <div className="size-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] text-primary shrink-0">MT</div>
-                <div className="min-w-0 flex-1">
-                  <span className="text-[9px] text-white block leading-tight font-medium truncate">Marcus Thorne</span>
-                  <span className="text-[8px] text-zinc-500 block leading-tight truncate">Director of Ops</span>
-                </div>
-              </div>
-
-              {/* Lead Snippet */}
-              <div className="bg-zinc-950 p-2 rounded-lg border border-white/5 text-[9px] text-zinc-400 font-light leading-relaxed h-[45px] overflow-y-auto scrollbar-thin">
-                "Hello Marcus! I noticed TechFlow scaled engineering by 40%..."
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 mt-3 text-[9px] font-mono">
-              <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
-                <span className="text-zinc-600 block">LEADS</span>
-                <span className="text-white font-bold">1,284</span>
-              </div>
-              <div className="bg-white/[0.01] p-1.5 border border-white/5 rounded">
-                <span className="text-zinc-600 block">CONV.</span>
-                <span className="text-white font-bold">18.4%</span>
-              </div>
-            </div>
+          {/* Footer details */}
+          <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-2 justify-between items-center text-[9px] font-mono text-zinc-650 w-full min-w-0">
+            <span className="truncate flex-1 text-left">Active Workspace: Hospitality Voice</span>
+            <span className="text-primary font-bold animate-pulse shrink-0">$48k Q3 Projected</span>
           </div>
         </div>
+      );
+    }
 
-        {/* Footer details */}
-        <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap gap-2 justify-between items-center text-[9px] font-mono text-zinc-600 w-full min-w-0">
-          <span className="truncate flex-1 text-left">Active Workspace: Hospitality Voice</span>
-          <span className="text-primary font-bold animate-pulse shrink-0">$48k Q3 Projected</span>
-        </div>
-      </div>
-    );
+    return null;
   };
 
   return (
