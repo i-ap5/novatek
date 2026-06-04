@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Aurora from './Aurora';
 
 
@@ -43,15 +44,15 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
         </a>
 
-        <a
-          href="#capabilities"
+        <Link
+          to="/portfolio"
           className="flex items-center gap-3 text-white font-semibold hover:text-primary transition-all group"
         >
           <span className="size-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/5 transition-all">
             <span className="material-symbols-outlined text-sm">play_arrow</span>
           </span>
-          Capabilities
-        </a>
+          Portfolio
+        </Link>
       </div>
     </div>
       </div>

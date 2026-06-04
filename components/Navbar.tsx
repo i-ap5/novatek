@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
 
         // Track active section only on home page
         if (location.pathname === '/') {
-          const sections = ['home', 'capabilities', 'contact'];
+          const sections = ['home', 'service', 'contact'];
           let currentActive = 'home';
 
           for (const section of sections) {
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
 
   const links = [
     { name: 'Home', href: '/#home' },
-    { name: 'Services', href: '/#capabilities' },
+    { name: 'Services', href: '/#service' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Products', href: '/products' },
     { name: 'Contact', href: '/#contact' }

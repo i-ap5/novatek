@@ -2,10 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Vision from './components/Vision';
 import About from './components/About';
-import Capabilities from './components/Capabilities';
-import Process from './components/Process';
+import Approach from './components/Approach';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import DetailedServices from './components/DetailedService';
@@ -29,17 +27,17 @@ const LandingPage: React.FC = () => {
         </section>
       </Reveal>
 
-      {/* 3. SERVICES OVERVIEW — "What do they offer?" */}
-      <Reveal>
-        <section id="capabilities" className="border-t border-border-light">
-          <Capabilities />
-        </section>
-      </Reveal>
-
-      {/* 4. SERVICES DETAIL — "What exactly can they build?" */}
+      {/* 3. SERVICES DETAIL — "What exactly can they build?" */}
       <Reveal>
         <section id="service" className="border-t border-border-light">
           <DetailedServices />
+        </section>
+      </Reveal>
+
+      {/* 4. PRODUCTS — "What have we built?" */}
+      <Reveal>
+        <section id="products" className="border-t border-border-light">
+          <Products teaser={true} />
         </section>
       </Reveal>
 
@@ -50,24 +48,9 @@ const LandingPage: React.FC = () => {
         </section>
       </Reveal>
 
+      {/* 6. METHODOLOGY — "Philosophy, Capabilities, & Process" */}
       <Reveal>
-        <section id="products" className="border-t border-border-light">
-          <Products teaser={true} />
-        </section>
-      </Reveal>
-
-      {/* 6. VALUES — "What do they stand for?" */}
-      <Reveal>
-        <section id="vision" className="border-t border-border-light bg-zinc-900/5">
-          <Vision />
-        </section>
-      </Reveal>
-
-      {/* 7. PROCESS — "How does working with them look?" */}
-      <Reveal>
-        <section id="process" className="border-t border-border-light">
-          <Process />
-        </section>
+        <Approach />
       </Reveal>
 
       {/* 8. ACTION — "I'm interested. Let me reach out." */}
