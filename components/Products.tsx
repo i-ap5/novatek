@@ -1053,9 +1053,10 @@ const ProductsWorkspace: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end border-b border-white/5 pb-10 gap-8">
           <div>
-            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">OUR PRODUCTS</span>
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Product Suite
+            </span>
             <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white">
-              The AI <span className="text-zinc-650 font-medium">Suite.</span>
+              Our <span className="text-zinc-650 font-medium">Products.</span>
             </h1>
           </div>
           <p className="text-zinc-400 text-base md:text-lg font-light max-w-xl border-l border-zinc-800 pl-8 leading-relaxed lg:mb-1">
