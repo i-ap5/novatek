@@ -24,7 +24,7 @@ const products: Product[] = [
   {
     id: "01",
     tag: "HEALTHCARE SYSTEMS - 01",
-    title: "SmartClinic — Intelligent Practice Management Suite",
+    title: "Novatek SmartClinic — Intelligent Practice Management Suite",
     shortDescription: "A clinic booking system that makes scheduling easy for patients, includes a high-contrast mode for elderly visitors, and helps manage urgent walk-ins.",
     problem: "Healthcare clinics struggle with high patient no-shows, complex booking interfaces that confuse older patients, inefficient prescription generation, and manual management of critical emergency availability slots.",
     solution: "A unified practice suite featuring a 30-minute interval booking grid, automated patient reminders, a visual 'Elder Mode' with simplified navigation, and a clinical AI prescription module with doctor-in-the-loop validation.",
@@ -43,7 +43,7 @@ const products: Product[] = [
   {
     id: "02",
     tag: "VOICE AGENTS - 02",
-    title: "Hospitality Voice — AI Support & Sales Agent",
+    title: "Novatek Hospitality Voice Agent — AI Support & Sales Agent",
     shortDescription: "An automated phone assistant that answers customer calls, books guest stays, and helps sales teams manage reservation requests.",
     problem: "Hospitality chains handling multi-property guest calls struggled with high volumes, inconsistent service and agents tied up on repetitive booking and availability queries. Sales teams had no scalable way to run proactive outreach across large lead pipelines.",
     solution: "Built a voice AI agent handling inbound support calls with NLU intent resolution, TTS response generation and CRM-API integration. Paired with an AI sales assistant for proactive lead outreach, qualification and conversion tracking across the hospitality chain.",
@@ -62,7 +62,7 @@ const products: Product[] = [
   {
     id: "03",
     tag: "LANGUAGE & AUDIO - 03",
-    title: "Echo Link — Offline RAG Document Extraction",
+    title: "Novatek Echo Link — Offline RAG Document Extraction",
     shortDescription: "A secure search assistant that lets your team chat with documents and get answers from contracts or reports without uploading files to the internet.",
     problem: "Organizations handling large volumes of unstructured documents such as contracts, invoices and legal agreements struggled with manual extraction that was slow, error-prone and inconsistent across varying document formats.",
     solution: "Fine-tuned LLM deployed offline for document extraction across tables, key-value pairs and long-form text. Integrated with existing document management systems via LLM APIs and added human-in-the-loop validation pipelines for edge cases.",
@@ -81,7 +81,7 @@ const products: Product[] = [
   {
     id: "04",
     tag: "LANGUAGE & AUDIO - 04",
-    title: "Sentiment Analysis — Ecommerce Review Intelligence",
+    title: "Novatek Sentiment Analysis — Ecommerce Review Intelligence",
     shortDescription: "A smart dashboard that reads thousands of online store reviews and instantly groups them so you can see what customers love or complain about.",
     problem: "An ecommerce platform struggled to understand what customers were most talking about across thousands of product reviews. Manual reading was unscalable, leaving negative sentiment and recurring complaint topics undetected until they affected ratings.",
     solution: "Built a sentiment analysis pipeline to categorise reviews by topic, surface the most discussed subjects and classify sentiment per category. Integrated with the product review feed to deliver real-time topic trend dashboards for merchandising and support teams.",
@@ -95,6 +95,44 @@ const products: Product[] = [
       "Ecommerce: Product review feed",
       "Topic Categorisation: Most-talked subjects",
       "Trend Dashboard: Real-time insights"
+    ]
+  },
+  {
+    id: "05",
+    tag: "HR SYSTEMS - 05",
+    title: "Novatek HR Flow — Simple Employee & Leave Management",
+    shortDescription: "An easy-to-use dashboard to track staff attendance, calculate payroll, and approve vacation requests.",
+    problem: "Managing team schedules, counting working hours, and processing monthly payroll by hand is slow and leads to errors.",
+    solution: "A simple employee dashboard that tracks daily hours automatically, calculates salaries, and lets you approve leave requests with one click.",
+    impact: "Saves hours of administrative work each week, guarantees error-free payroll calculations, and keeps all team schedules in one place.",
+    stats: [
+      { value: "12h", suffix: "Saved", label: "Admin time weekly" },
+      { value: "0%", suffix: "Errors", label: "Salary calculations" },
+      { value: "1-Click", suffix: "Time-off", label: "Leave approvals" }
+    ],
+    features: [
+      "Track attendance and working hours",
+      "Calculate monthly salaries automatically",
+      "Approve time-off requests with one click"
+    ]
+  },
+  {
+    id: "06",
+    tag: "E-COMMERCE - 06",
+    title: "Novatek E-Commerce Store — Fast Storefront & Checkout Engine",
+    shortDescription: "A fast online store platform that speeds up checkout, reduces abandoned shopping carts, and processes payments securely.",
+    problem: "Slow online shops frustrate buyers, causing them to leave before buying, while complex checkout screens lower sales.",
+    solution: "A modern, lightweight storefront with a fast one-page checkout, built-in popular payment systems, and secure transactions.",
+    impact: "Improves checkout conversion rates, speeds up page loading times, and safely handles customer credit cards.",
+    stats: [
+      { value: "+42%", suffix: "Sales", label: "Checkout conversion lift" },
+      { value: "1.2s", suffix: "Load", label: "Page loading speed" },
+      { value: "100%", suffix: "Secure", label: "Stripe & card payments" }
+    ],
+    features: [
+      "Fast checkout for higher sales",
+      "Accept Stripe, credit cards, and Apple Pay",
+      "Automatic stock and inventory alerts"
     ]
   }
 ];
@@ -121,10 +159,10 @@ const ProductsTeaser: React.FC = () => {
         {/* Header Block */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-2xl">
-            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Our Products</span>
+            <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Product Suite</span>
             <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
-              Ready-to-use <br />
-              <span className="text-zinc-600 font-light">software.</span>
+              Our <br />
+              <span className="text-zinc-600 font-light">products.</span>
             </h2>
           </div>
           <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
@@ -165,30 +203,50 @@ const ProductsTeaser: React.FC = () => {
 
                       {/* Micro badge for SmartClinic */}
                       {p.id === "01" && isHovered && (
-                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[10px]">medical_services</span> Elder Mode
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+                          Elder Mode
                         </span>
                       )}
 
                       {/* Micro rating for Sentiment Analysis */}
                       {p.id === "04" && isHovered && (
-                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">★ 4.8</span>
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                          4.8 Rating
+                        </span>
                       )}
 
                       {/* Micro document count for Echo Link */}
                       {p.id === "03" && isHovered && (
-                        <span className="text-[8px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[10px]">description</span> RAG
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+                          Secure RAG
                         </span>
                       )}
 
                       {/* Micro Waveform Icon for Hospitality Voice */}
                       {p.id === "02" && isHovered && (
-                        <div className="flex items-center gap-0.5 h-3">
-                          <span className="w-[1.5px] bg-primary h-full animate-[pulse_1s_infinite]"></span>
-                          <span className="w-[1.5px] bg-primary h-[60%] animate-[pulse_0.8s_infinite_100ms]"></span>
-                          <span className="w-[1.5px] bg-primary h-[80%] animate-[pulse_1.2s_infinite_200ms]"></span>
-                        </div>
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="2" width="6" height="12" rx="3" ry="3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+                          Voice AI
+                        </span>
+                      )}
+
+                      {/* Micro badge for HR StaffFlow */}
+                      {p.id === "05" && isHovered && (
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                          HR Suite
+                        </span>
+                      )}
+
+                      {/* Micro badge for StoreFlow */}
+                      {p.id === "06" && isHovered && (
+                        <span className="text-[8px] font-mono tracking-wider text-primary border border-primary/20 bg-primary/5 px-2 py-0.5 rounded-full uppercase flex items-center gap-1.5">
+                          <svg className="w-2.5 h-2.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                          E-Commerce
+                        </span>
                       )}
                     </div>
                     <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase block">
@@ -291,6 +349,13 @@ const ProductsWorkspace: React.FC = () => {
   const [prescFinalized, setPrescFinalized] = useState(false);
   const [prescMethod, setPrescMethod] = useState<"AI" | "Manual" | null>(null);
   const [isSuggesting, setIsSuggesting] = useState(false);
+
+  // HR Flow states
+  const [hrStatus, setHrStatus] = useState<"pending" | "approved" | "denied">("pending");
+  const [hrLoading, setHrLoading] = useState(false);
+
+  // StoreFlow states
+  const [checkoutStatus, setCheckoutStatus] = useState<"idle" | "processing" | "success">("idle");
 
   // Simulate Hospitality calls in background
   useEffect(() => {
@@ -822,6 +887,159 @@ const ProductsWorkspace: React.FC = () => {
         </div>
       );
     }
+
+    if (idx === 4) {
+      // HR Solution mockup
+      return (
+        <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full h-full min-h-[280px]">
+          {/* Header */}
+          <div className="flex justify-between items-center pb-2.5 border-b border-white/5 shrink-0">
+            <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-mono">HR Operations</span>
+            <span className="text-[9px] text-primary flex items-center gap-1 font-semibold font-mono uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+              StaffFlow Live
+            </span>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col justify-center my-4 space-y-4 text-left font-sans">
+            <div className="bg-zinc-900/40 border border-white/5 rounded-xl p-4 space-y-3">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-[8px] uppercase tracking-wider text-zinc-500 font-mono block mb-0.5">Vacation Request</span>
+                  <p className="text-[11px] text-zinc-200 font-medium">Sarah Jenkins — UX Designer</p>
+                </div>
+                <span className="text-[8px] text-zinc-400 font-mono">June 14 - June 18</span>
+              </div>
+              <div className="pt-3 border-t border-white/5 flex justify-between items-center">
+                <div>
+                  <span className="text-[8px] uppercase tracking-wider text-zinc-550 block mb-0.5 font-mono">Approval Status</span>
+                  <p className={`text-[11px] font-semibold uppercase tracking-wider ${hrStatus === "approved" ? "text-emerald-400" : hrStatus === "denied" ? "text-red-400" : "text-amber-400"}`}>
+                    {hrStatus}
+                  </p>
+                </div>
+                {hrStatus === "pending" && !hrLoading && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        setHrLoading(true);
+                        setTimeout(() => {
+                          setHrStatus("approved");
+                          setHrLoading(false);
+                        }, 600);
+                      }}
+                      className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono uppercase rounded-lg hover:bg-emerald-500/20 transition-colors"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => {
+                        setHrLoading(true);
+                        setTimeout(() => {
+                          setHrStatus("denied");
+                          setHrLoading(false);
+                        }, 600);
+                      }}
+                      className="px-2.5 py-1 bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-mono uppercase rounded-lg hover:bg-red-500/20 transition-colors"
+                    >
+                      Deny
+                    </button>
+                  </div>
+                )}
+                {hrLoading && (
+                  <span className="text-[10px] text-zinc-500 font-mono animate-pulse">Processing...</span>
+                )}
+                {hrStatus !== "pending" && (
+                  <button
+                    onClick={() => setHrStatus("pending")}
+                    className="text-[9px] text-zinc-500 hover:text-zinc-400 underline font-mono"
+                  >
+                    Reset
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Stats Summary Footer */}
+          <div className="border-t border-white/5 pt-2.5 flex justify-between text-[9px] text-zinc-500 font-mono shrink-0">
+            <span>Staff On Leave: 2/18</span>
+            <span>Next Payroll Run: June 30</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (idx === 5) {
+      // E-Commerce Solution mockup
+      return (
+        <div className="flex-1 flex flex-col justify-between text-zinc-300 font-sans text-xs w-full h-full min-h-[280px]">
+          {/* Header */}
+          <div className="flex justify-between items-center pb-2.5 border-b border-white/5 shrink-0">
+            <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-mono">Checkout Terminal</span>
+            <span className="text-[9px] text-primary flex items-center gap-1 font-semibold font-mono uppercase">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+              StoreFlow Fast-Pay
+            </span>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col justify-center my-4 space-y-4 text-left font-sans">
+            <div className="bg-zinc-900/40 border border-white/5 rounded-xl p-4 space-y-3">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-[8px] uppercase tracking-wider text-zinc-500 font-mono block mb-0.5">Shopping Cart</span>
+                  <p className="text-[11px] text-zinc-200 font-medium">Novatek Pro Wireless Headset</p>
+                </div>
+                <span className="text-[11px] text-primary font-mono font-bold">$189.00</span>
+              </div>
+              <div className="pt-3 border-t border-white/5">
+                {checkoutStatus === "idle" && (
+                  <button
+                    onClick={() => {
+                      setCheckoutStatus("processing");
+                      setTimeout(() => {
+                        setCheckoutStatus("success");
+                      }, 1000);
+                    }}
+                    className="w-full py-2.5 bg-primary text-bg-dark text-[10px] font-bold tracking-wider uppercase rounded-xl hover:scale-[1.02] transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-sm">bolt</span>
+                    1-Click Checkout
+                  </button>
+                )}
+                {checkoutStatus === "processing" && (
+                  <div className="text-center py-2 text-[10px] font-mono text-zinc-500 animate-pulse">
+                    Authorizing payment secure credentials...
+                  </div>
+                )}
+                {checkoutStatus === "success" && (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-emerald-400 py-1.5 text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                      <span className="material-symbols-outlined text-sm">check_circle</span>
+                      Order Placed Successfully!
+                    </div>
+                    <button
+                      onClick={() => setCheckoutStatus("idle")}
+                      className="w-full text-center text-[9px] text-zinc-500 hover:text-zinc-400 underline font-mono"
+                    >
+                      Demo Checkout Again
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Checkout Footer Info */}
+          <div className="border-t border-white/5 pt-2.5 flex justify-between text-[9px] text-zinc-500 font-mono shrink-0">
+            <span>Server Response: 1.2s</span>
+            <span>Security: PCI-DSS Compliant</span>
+          </div>
+        </div>
+      );
+    }
+
     return null;
   };
 
@@ -857,7 +1075,7 @@ const ProductsWorkspace: React.FC = () => {
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center relative py-8 sm:py-12 border-b border-white/5 last:border-0 w-full max-w-full min-w-0 overflow-hidden`}
             >
               {/* Product specific background glowing orb — hidden on mobile to prevent overflow */}
-              <div className={`absolute -top-10 ${isAlternate ? 'left-10' : 'right-10'} w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full blur-[120px] pointer-events-none hidden sm:block ${idx === 0 ? 'bg-emerald-500/5' : idx === 1 ? 'bg-indigo-500/5' : idx === 2 ? 'bg-cyan-500/5' : 'bg-primary/5'
+              <div className={`absolute -top-10 ${isAlternate ? 'left-10' : 'right-10'} w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] rounded-full blur-[120px] pointer-events-none hidden sm:block ${idx === 0 ? 'bg-emerald-500/5' : idx === 1 ? 'bg-indigo-500/5' : idx === 2 ? 'bg-cyan-500/5' : idx === 3 ? 'bg-purple-500/5' : idx === 4 ? 'bg-amber-500/5' : 'bg-primary/5'
                 }`}></div>
 
               {/* Details column */}
