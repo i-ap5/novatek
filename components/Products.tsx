@@ -162,7 +162,7 @@ const ProductsTeaser: React.FC = () => {
             <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Product Suite</span>
             <h2 className="text-5xl md:text-7xl font-light tracking-tight text-white leading-none">
               Our <br />
-              <span className="text-zinc-600 font-light">products.</span>
+              <span className="text-primary font-light">products.</span>
             </h2>
           </div>
           <p className="text-zinc-500 font-light max-w-sm border-l border-zinc-800 pl-8 leading-relaxed text-sm md:text-base">
@@ -1056,7 +1056,7 @@ const ProductsWorkspace: React.FC = () => {
             <span className="text-primary font-bold text-[10px] tracking-[0.6em] uppercase block mb-6 font-mono">Product Suite
             </span>
             <h1 className="text-4xl md:text-6xl font-light tracking-tight text-white">
-              Our <span className="text-zinc-650 font-medium">Products.</span>
+              Our <span className="text-primary font-light">Products.</span>
             </h1>
           </div>
           <p className="text-zinc-400 text-base md:text-lg font-light max-w-xl border-l border-zinc-800 pl-8 leading-relaxed lg:mb-1">

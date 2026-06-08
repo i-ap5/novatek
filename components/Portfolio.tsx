@@ -3,15 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Assets (compressed JPGs — resized to 1200px wide, ~540KB total vs 5MB raw)
-const almadina1 = '/assets/almadina1.jpg';
-const almadina2 = '/assets/almadina2.jpg';
-const foodworld = '/assets/www.foodworldgroup.com_.jpg';
+const almadina1 = '/assets/almadina1.webp';
+const almadina2 = '/assets/almadina2.webp';
+const foodworld = '/assets/foodworld.webp';
 const dokaz1 = '/assets/dokaz1.webp';
-const healthcare = '/assets/healthcare.jpg';
-const rag = '/assets/rag.jpg';
-const hr = '/assets/hr.jpg';
-const voiceAgent = '/assets/voice-agent.jpg';
-const ecom = '/assets/ecom.jpg';
+const healthcare = '/assets/healthcare.webp';
+const rag = '/assets/rag.webp';
+const hr = '/assets/hr.webp';
+const voiceAgent = '/assets/voice-agent.webp';
+const ecom = '/assets/ecom.webp';
 const sentimentAnalysis = '/assets/sentiment.webp';
 
 interface Project {
@@ -219,7 +219,7 @@ const Portfolio: React.FC<{ teaser?: boolean }> = ({ teaser = false }) => {
   };
 
   const filteredProjects = teaser
-    ? projects.filter(p => p.type === 'case')
+    ? projects.filter(p => p.type === 'case' && p.id !== '01')
     : projects.filter(p => activeTab === 'all' || p.type === activeTab);
 
   return (
